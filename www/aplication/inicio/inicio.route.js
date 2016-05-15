@@ -5,7 +5,7 @@
     .config(config);
 
   function config($stateProvider) {
-    $stateProvider.state('app.animador', {
+    $stateProvider.state('app.inicio', {
       url: '/inicio',
       templateUrl: 'aplication/inicio/inicio.html',
       controller: 'Inicio'

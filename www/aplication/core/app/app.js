@@ -25,6 +25,14 @@ angular.module('app', ['ionic'])
 
 .controller('App',controller);
 
-function controller() {
+function controller($scope) {
+
+  $scope.close = close;
+
+  /////
+  function close() {
+    console.log('ionic.Platform.exitApp()');
+    ionic.Platform.exitApp();
+  }
 
 }

@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="true">
   <ion-side-menu-content>
-    <ion-nav-bar>
+    <ion-nav-bar class="bar-balanced">
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon"
                 menu-toggle="left">
@@ -13,29 +13,37 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-acttiv">
+    <ion-header-bar class="bar-balanced">
       <h1 class="title">%Usuario actual%</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item>
+        <ion-item menu-close
+                  ng-class="{active: current === 'app/inicio'}"
+                  href="#app/inicio"
+                  native-ui-sref="app.inicio"
+                  native-options="{type: 'slide', direction:'down'}">
           Inicio
         </ion-item>
-        <ion-item>
-          Mis Plantas
+        <ion-item menu-close
+                  ng-class="{active: current === 'app.mis-plantas.list'}"
+                  href="#app/mis-plantas/list"
+                  native-ui-sref="app.mis-plantas.list"
+                  native-options="{type: 'slide', direction:'down'}">
+          Mis plantas
         </ion-item>
         <ion-item>
           Configuración
         </ion-item>
         <ion-item class="assertive"
                   menu-close
-                  ng-click="signOut()">
+                  ng-click="">
           Cerrar sesión
         </ion-item>
         <ion-item class="assertive stable-bg"
                   menu-close
                   ng-click="close()"
-                  ng-if="showClose">
+                  ng-if="">
           Cerrar aplicación
         </ion-item>
       </ion-list>

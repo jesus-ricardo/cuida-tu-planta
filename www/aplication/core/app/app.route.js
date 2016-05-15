@@ -5,7 +5,7 @@
     .config(config);
 
   function config($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/app/inicio");
+    $urlRouterProvider.otherwise("/app/mis-plantas/list");
     $stateProvider.state('app', {
       abstract: true,
       url: '/app',
