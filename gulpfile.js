@@ -1,51 +1,29 @@
+//requires
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var bower = require('bower');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var sh = require('shelljs');
+var runSequence = require('run-sequence'); //permite ejecutar tareas de manera sincrona o asincrona a voluntad
+var inject = require('gulp-inject');  //inyectar js y css
 
-var paths = {
-  sass: ['./scss/**/*.scss']
-};
+//vars
+var JSPATH='./www/**/*.js';
+var INDEX='./www/index.html';
 
-gulp.task('default', ['sass']);
+//tasks
+gulp.task('default',['dev']);
+gulp.task('dev',dev);
+gulp.task('inject-js',injectJS);
 
-gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass())
-    .on('error', sass.logError)
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
-    .on('end', done);
-});
+//Functions
+function dev() {
+  runSequence(
+    'inject-js'
+  );
+}
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
-});
-
-gulp.task('install', ['git-check'], function() {
-  return bower.commands.install()
-    .on('log', function(data) {
-      gutil.log('bower', gutil.colors.cyan(data.id), data.message);
-    });
-});
-
-gulp.task('git-check', function(done) {
-  if (!sh.which('git')) {
-    console.log(
-      '  ' + gutil.colors.red('Git is not installed.'),
-      '\n  Git, the version control system, is required to download Ionic.',
-      '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
-      '\n  Once git is installed, run \'' + gutil.colors.cyan('gulp install') + '\' again.'
-    );
-    process.exit(1);
-  }
-  done();
-});
+function injectJS(){
+  var target = gulp.src(INDEX);
+  // It's not necessary to read the files (will speed up things), we're only after their paths:
+  var sources = gulp.src([JSPATH,'!./www/lib/**/*'], {cwd: 'www/', read: false});
+  return target.pipe(inject(sources),  { addRootSlash: false, relative: true, ignorePath: 'www/' })
+    .pipe(gulp.dest('./www'));
+}
