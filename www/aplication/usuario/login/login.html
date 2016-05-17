@@ -1,0 +1,21 @@
+<ion-view view-title="Inicio">
+  <form name="loginForm">
+  <ion-content class="padding has-header">
+    <div>
+      <div class="list">
+        <label class="item item-input">
+          <input ng-model="data.nombre" name="nombre" required type="text" placeholder="Nombre">
+        </label>
+        <label class="item item-input">
+          <input ng-model="data.password" name="password" required type="password" placeholder="Contraseña">
+        </label>
+        <button
+          ng-click="login()"
+          class="button button-block button-balanced">
+          Entrar
+        </button>
+      </div>
+    </div>
+  </ion-content>
+  </form>
+</ion-view>

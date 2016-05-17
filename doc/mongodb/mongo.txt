@@ -1,0 +1,7 @@
+iniciar servidor
+mongod.exe --dbpath C:\mongodb\data
+iniciar cliente
+mongo [dbname]
+
+marcar un campo como unico (unique en mysql)
+db.user.createIndex({"name": 1}, {unique: true});

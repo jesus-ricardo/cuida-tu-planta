@@ -1,0 +1,22 @@
+{
+  name,password,
+  plantas: [
+    //planta1
+    {id: ObjectId(),nombre, fechaNacimiento,
+
+      registros: [
+        {temperatura, humedad, fechaRegistro},
+        {temperatura, humedad, fechaRegistro},
+        {temperatura, humedad, fechaRegistro}
+      ]},
+    //planta2
+    {id: ObjectId(),nombre, fechaNacimiento,
+
+      registros: [
+        {temperatura, humedad, fechaRegistro},
+        {temperatura, humedad, fechaRegistro},
+        {temperatura, humedad, fechaRegistro}
+      ]}
+    //mas plantas ....
+  ]
+}

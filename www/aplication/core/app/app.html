@@ -18,6 +18,12 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
+        <ion-item
+          href="#app/login"
+          native-ui-sref="app.login"
+          native-options="{type: 'slide', direction:'down'}">
+          Login
+        </ion-item>
         <ion-item menu-close
                   ng-class="{active: current === 'app/inicio'}"
                   href="#app/inicio"

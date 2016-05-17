@@ -21,7 +21,7 @@ function dev() {
   );
 }
 
-function injectJS(){
+function injectJS() {
   //var target = gulp.src(INDEX);
   // It's not necessary to read the files (will speed up things), we're only after their paths:
   //var sources = gulp.src([JSPATH,'!./www/lib/**/*'], {read: false});
