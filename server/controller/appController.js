@@ -120,6 +120,7 @@ module.exports.plantaDatos = plantaDatos;
 module.exports.insertUser = insertUser;
 module.exports.getUser  = getUser;
 module.exports.userLogin  = userLogin;
+module.exports.insertPlanta = insertPlanta;
 
 //////
 
@@ -188,6 +189,39 @@ function userLogin(req, res) {
       });
   });
   console.log(usuario);
+}
+function insertPlanta(req, res) {
+  console.log(req.body.idUser);
+  console.log(req.body.data);
+  var idUser = req.body.idUser;
+  var data = req.body.data;
+  //creamos un objectID a partir del id del usuario
+  if (isObjectID(idUser)) {
+    var objetId = mongo.ObjectID(idUser);
+  }
+  else {
+    res.status(400).json({message: 'id no válido'});
+    return;
+  }
+  MongoClient.connect("mongodb://localhost:27017/plantas", function(err, db) {
+    if(err) { return console.dir(err); }
+    var collection = db.collection('user');
+    var existePlanta = collection.find({"plantas.id": data.idPlanta}).toArray(function(err, result){
+      console.log(result.length);
+      if (result.length == 0) {
+        collection.updateOne({_id: objetId}, {$push: {"plantas": {id: data.idPlanta, nombre: data.nombre, fechaNacimiento: data.fechaNacimiento, registros: [], fotos: []}}}, function (err, result){
+          if (err) {
+            res.status(500).json({message: 'no se pudo insertar planta'});
+            return;
+          }
+          res.status(200).json({message: 'planta insertada'});
+        });
+      } else {
+        res.status(400).json({message: 'Id planta ya existe'});
+        return;
+      }
+    });
+  });
 }
 
 //libs

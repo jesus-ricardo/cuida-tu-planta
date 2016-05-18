@@ -4,13 +4,14 @@
   angular.module('app')
     .factory('misPlantasSrv', factory);
 
-  function factory($q) {
+  function factory($q, $http, $localStorage) {
 
 
     return {
       select: select,
       get: get,
-      getPicture: getPicture
+      getPicture: getPicture,
+      insertPlanta: insertPlanta
       //
     };
 
@@ -58,6 +59,10 @@
         dias: "32",
         estadio: "Floracion",
         pathFoto:'aplication/core/images/poto1.jpg'}
+    }
+
+    function insertPlanta(planta) {
+      return $http.post('http://localhost:7777/planta/new',{idUser: $localStorage.user._id, data: planta});
     }
   }
 }());

@@ -2,21 +2,36 @@
   name,password,
   plantas: [
     //planta1
-    {id: ObjectId(),nombre, fechaNacimiento,
+    {id: ObjectId(),nombre, fechaNacimiento,fotoPrincipal
 
-      registros: [
+      1*registros: [
         {temperatura, humedad, fechaRegistro},
         {temperatura, humedad, fechaRegistro},
         {temperatura, humedad, fechaRegistro}
+      ],
+      fotos: [
+        {url,fechaCreacion},
+        {url,fechaCreacion},
+        {url,fechaCreacion}
       ]},
     //planta2
-    {id: ObjectId(),nombre, fechaNacimiento,
+    {id: ObjectId(),nombre, fechaNacimiento,fotoPrincipal
 
-      registros: [
+      1*registros: [
         {temperatura, humedad, fechaRegistro},
         {temperatura, humedad, fechaRegistro},
         {temperatura, humedad, fechaRegistro}
+      ],
+      fotos: [
+        {url,fechaCreacion},
+        {url,fechaCreacion},
+        {url,fechaCreacion}
       ]}
     //mas plantas ....
   ]
 }
+
+2* registros:
+[
+{id_planta, temperatura, humedad, fechaRegistro}
+]
