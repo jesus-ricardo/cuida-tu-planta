@@ -4,15 +4,18 @@
   angular.module('app')
     .controller('MisPlantas', controller);
 
-  function controller($scope) {
+  function controller($scope, routeSrv) {
 
     $scope.goDetail = goDetail;
-
+    $scope.goNuevaPlanta = goNuevaPlanta;
 
     //////
 
+    function goNuevaPlanta(){
+      routeSrv.go('app.mis-plantas.nueva-planta');
+    }
     function goDetail() {
-     //$state.go('app.mis-plantas.detail',{},{});
+     routeSrv.go('app.mis-plantas.detail');
     }
   }
 }());

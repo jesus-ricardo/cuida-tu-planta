@@ -4,13 +4,13 @@
   angular.module('app')
     .controller('MiPlantaDetail', controller);
 
-  function controller($scope, routeSrv) {
+  function controller($scope, $state) {
     $scope.goBack = goBack;
 
 
    ////
     function goBack(){
-    routeSrv.go('app.mis-plantas.list');
+    $state.go('app.mis-plantas.list');
     }
   }
 }());

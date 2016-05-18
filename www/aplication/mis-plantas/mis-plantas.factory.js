@@ -1,22 +1,32 @@
-/**
- * Created by rjara on 8/04/16.
- */
 (function () {
   'use strict';
 
   angular.module('app')
     .factory('misPlantasSrv', factory);
 
-  function factory($filter, $http) {
+  function factory($q) {
 
 
     return {
       select: select,
-      get: get
+      get: get,
+      getPicture: getPicture
       //
     };
 
     //////////
+    function getPicture(options) {
+      var q = $q.defer();
+
+      navigator.camera.getPicture(function(result) {
+        q.resolve(result);
+      }, function(err) {
+        q.reject(err);
+      }, options);
+
+      return q.promise;
+    }
+
     function select() {
       return [
         {id_planta: 1,nombre: "planta1",descripcion: "blablalbalbal",

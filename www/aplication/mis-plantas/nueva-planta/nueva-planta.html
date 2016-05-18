@@ -1,0 +1,12 @@
+<ion-view view-title="Nueva planta">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-ios-arrow-back"
+            ng-click="goBack()"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="padding has-header">
+    <button class = "button" ng-click = "takePicture()">Take Picture</button>
+    <button class = "button" ng-click = "getPicture()">Open Gallery</button>
+    <img ng-src = "{{user.picture}}">
+  </ion-content>
+</ion-view>
