@@ -4,8 +4,10 @@
   angular.module('app')
     .controller('MiPlantaDetail', controller);
 
-  function controller($scope, routeSrv) {
+  function controller($scope, routeSrv, planta) {
+    console.log(planta);
     $scope.goBack = goBack;
+    $scope.planta = planta;
 
 
    ////

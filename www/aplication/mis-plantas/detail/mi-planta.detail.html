@@ -5,6 +5,17 @@
   </ion-nav-buttons>
 
   <ion-content class="padding has-header">
-   Detalle planta
+
+    <div class="list card">
+      <div class="item item-body">
+        <img  class="full-image" src="aplication/core/images/poto1.jpg">
+        <h2>{{planta.nombre}}</h2>
+        <p>
+          {{planta.descripcion || 'Descripción no disponible'}}
+        </p>
+      </div>
+
+    </div>
+
   </ion-content>
 </ion-view>

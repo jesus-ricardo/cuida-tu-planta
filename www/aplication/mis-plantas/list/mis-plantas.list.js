@@ -5,10 +5,10 @@
     .controller('MisPlantas', controller);
 
   function controller($scope, routeSrv, plantas) {
-    
+
     console.log(plantas);
     $scope.plantas = plantas;
-    
+
     $scope.goDetail = goDetail;
     $scope.goNuevaPlanta = goNuevaPlanta;
 
@@ -17,8 +17,9 @@
     function goNuevaPlanta(){
       routeSrv.go('app.mis-plantas.nueva-planta');
     }
-    function goDetail() {
-     routeSrv.go('app.mis-plantas.detail');
+    function goDetail(id) {
+      console.log(id);
+     routeSrv.go('app.mis-plantas.detail', {id: id});
     }
   }
 }());

@@ -2,6 +2,7 @@ var express = require('express');
 var routes = require('../routes/index.js');
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
+var mongoDB = require('./libs/mongoDB.js');
 /*
 module.exports.selectFichero=function(req,res){
 	res.json(fichero);
@@ -116,12 +117,17 @@ module.exports.getIdMysql=function(req,res){
 	conect.end();
 }
 */
+mongoDB.conecta('localhost',27017,'plantas');
 module.exports.plantaDatos = plantaDatos;
 module.exports.insertUser = insertUser;
 module.exports.getUser  = getUser;
 module.exports.userLogin  = userLogin;
 module.exports.insertPlanta = insertPlanta;
 module.exports.selectPlantas = selectPlantas;
+module.exports.getPlanta = getPlanta;
+
+
+module.exports.pruebaDB = pruebaDB;
 
 //////
 
@@ -242,6 +248,36 @@ function selectPlantas(req, res) {
       console.log(result[0].plantas);
       res.json(result[0].plantas);
     });
+  });
+}
+
+function getPlanta(req, res) {
+  var idPlanta = req.params.idPlanta.toString();
+  var idUsuario = mongoDB.getObjectID(req.params.idUser);
+  if (idUsuario == null) {res.json({message: 'mal id usuario'}); return;}
+  console.log(idPlanta);
+  console.log(idUsuario);
+  mongoDB.find('user', {_id: idUsuario, "plantas.id": idPlanta},{'plantas.$': 1}).then(function (data){
+    console.log('then');
+    console.log(data);
+    res.json(data[0].plantas[0]);
+  }).catch(function (err){
+    console.log('error');
+    console.log(err);
+    res.json(err);return;
+  })
+}
+
+
+
+
+function pruebaDB(req, res) {
+  mongoDB.conecta('localhost',27017,'plantas');
+  mongoDB.find('user', {_id: mongo.ObjectID("573b3cb013724b6c13a8a560")},{"plantas": 1, _id: 0}).then(function(data){
+    res.json(data[0].plantas);
+
+  }).catch(function(err){
+    res.json(err);return;
   });
 }
 

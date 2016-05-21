@@ -12,7 +12,8 @@
       get: get,
       getPicture: getPicture,
       insertPlanta: insertPlanta,
-      selectPlantas: selectPlantas
+      selectPlantas: selectPlantas,
+      getPlanta: getPlanta
       //
     };
 
@@ -71,6 +72,11 @@
       return $http.get('http://localhost:7777/planta/select/' + $localStorage.user._id).then(function (res){
           return res.data;
         });
+    }
+    function getPlanta(idPlanta) {
+      return $http.get('http://localhost:7777/planta/get/' + $localStorage.user._id+'/'+idPlanta).then(function (res){
+        return res.data;
+      });
     }
   }
 }());
