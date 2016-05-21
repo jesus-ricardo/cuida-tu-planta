@@ -36,7 +36,7 @@
     }
 
     function back(optionsParams) {
-      let options = optionsParams || {reload: false};
+      var options = optionsParams || {reload: false};
       if (
         $ionicHistory.viewHistory()
           .histories[$ionicHistory.currentHistoryId()].stack.length > 1

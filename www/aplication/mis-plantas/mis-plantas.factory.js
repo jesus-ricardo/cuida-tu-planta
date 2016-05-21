@@ -11,7 +11,8 @@
       select: select,
       get: get,
       getPicture: getPicture,
-      insertPlanta: insertPlanta
+      insertPlanta: insertPlanta,
+      selectPlantas: selectPlantas
       //
     };
 
@@ -62,7 +63,14 @@
     }
 
     function insertPlanta(planta) {
+      console.log('planta factory');
+      console.log(planta);
       return $http.post('http://localhost:7777/planta/new',{idUser: $localStorage.user._id, data: planta});
+    }
+    function selectPlantas() {
+      return $http.get('http://localhost:7777/planta/select/' + $localStorage.user._id).then(function (res){
+          return res.data;
+        });
     }
   }
 }());

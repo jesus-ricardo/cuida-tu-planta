@@ -9,7 +9,8 @@
     $scope.data = {
       idPlanta: null,
       nombre: null,
-      fechaNacimiento: new Date()
+      fechaNacimiento: new Date(),
+      descripcion: ''
     }
     $scope.goBack = goBack;
     $scope.insertPlanta = insertPlanta;
@@ -52,7 +53,10 @@
         console.log('identificador de planta obligatorio');
       } else if ($scope.nuevaPlantaForm.nombre.$invalid){
         console.log('nombre de planta obligatorio');
-      } else{
+      } else if ($scope.nuevaPlantaForm.descripcion.$invalid) {
+        console.log('descripcion obligatoria');
+      }
+      else{
         console.log('formulario invalido');
       }
     }

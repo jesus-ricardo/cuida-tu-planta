@@ -10,9 +10,9 @@
       templateUrl: 'aplication/mis-plantas/list/mis-plantas.list.html',
       controller: 'MisPlantas',
       resolve: {
-        // plantas: function (misPlantasSrv) {
-        //   return misPlantasSrv.select();
-        // }
+         plantas: function (misPlantasSrv) {
+           return misPlantasSrv.selectPlantas();
+        }
       }
 
     })

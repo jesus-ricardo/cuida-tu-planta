@@ -37,5 +37,6 @@ router.get('/user/new',appController.insertUser);
 router.get('/user/get/:id',appController.getUser);
 router.post('/user/login',appController.userLogin);
 router.post('/planta/new',appController.insertPlanta);
+router.get('/planta/select/:idUser',appController.selectPlantas);
 
 module.exports = router;

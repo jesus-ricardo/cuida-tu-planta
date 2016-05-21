@@ -4,8 +4,11 @@
   angular.module('app')
     .controller('MisPlantas', controller);
 
-  function controller($scope, routeSrv) {
-
+  function controller($scope, routeSrv, plantas) {
+    
+    console.log(plantas);
+    $scope.plantas = plantas;
+    
     $scope.goDetail = goDetail;
     $scope.goNuevaPlanta = goNuevaPlanta;
 

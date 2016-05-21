@@ -121,6 +121,7 @@ module.exports.insertUser = insertUser;
 module.exports.getUser  = getUser;
 module.exports.userLogin  = userLogin;
 module.exports.insertPlanta = insertPlanta;
+module.exports.selectPlantas = selectPlantas;
 
 //////
 
@@ -195,6 +196,7 @@ function insertPlanta(req, res) {
   console.log(req.body.data);
   var idUser = req.body.idUser;
   var data = req.body.data;
+  console.log(data);
   //creamos un objectID a partir del id del usuario
   if (isObjectID(idUser)) {
     var objetId = mongo.ObjectID(idUser);
@@ -209,7 +211,7 @@ function insertPlanta(req, res) {
     var existePlanta = collection.find({"plantas.id": data.idPlanta}).toArray(function(err, result){
       console.log(result.length);
       if (result.length == 0) {
-        collection.updateOne({_id: objetId}, {$push: {"plantas": {id: data.idPlanta, nombre: data.nombre, fechaNacimiento: data.fechaNacimiento, registros: [], fotos: []}}}, function (err, result){
+        collection.updateOne({_id: objetId}, {$push: {"plantas": {id: data.idPlanta, nombre: data.nombre, fechaNacimiento: data.fechaNacimiento, descripcion: data.descripcion, registros: [], fotos: []}}}, function (err, result){
           if (err) {
             res.status(500).json({message: 'no se pudo insertar planta'});
             return;
@@ -220,6 +222,25 @@ function insertPlanta(req, res) {
         res.status(400).json({message: 'Id planta ya existe'});
         return;
       }
+    });
+  });
+}
+function selectPlantas(req, res) {
+  console.log(req.params);
+  if (isObjectID(req.params.idUser)) {
+    var objectId = mongo.ObjectID(req.params.idUser);
+  }
+  else {
+    res.status(400).json({message: 'id no válido'});
+    return;
+  }
+  MongoClient.connect("mongodb://localhost:27017/plantas", function(err, db) {
+    if(err) { return console.dir(err); }
+    var collection = db.collection('user');
+
+    collection.find({_id: objectId},{"plantas": 1, _id: 0}).toArray(function(err, result) {
+      console.log(result[0].plantas);
+      res.json(result[0].plantas);
     });
   });
 }

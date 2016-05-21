@@ -5,7 +5,15 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="padding has-header">
-    <div class="row">
+    <div class="list">
+
+      <a ng-click="goDetail()" ng-repeat="planta in plantas" class="item item-thumbnail-left">
+        <img  class="full-image" src="aplication/core/images/poto1.jpg">
+        <h2>{{planta.nombre}}</h2>
+        <p>{{planta.descripcion || 'No disponible'}}</p>
+      </a>
+      </div>
+    <!--<div class="row">
       <div ng-click="goDetail()"
         class="col col-50">
         <div class="item item-divider-android">
@@ -102,6 +110,6 @@
             </p>
           </div>
       </div>
-    </div>
+    </div>-->
   </ion-content>
 </ion-view>

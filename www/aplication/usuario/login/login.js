@@ -19,7 +19,7 @@
           $localStorage.user = user.data[0];
           console.log(user.data[0]);
           console.log('login realizado');
-        }).catch((err)=>{
+        }).catch(function (err){
           console.log('Login falló');
         });
       } else{

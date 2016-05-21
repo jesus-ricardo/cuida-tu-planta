@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 7777;        // set our port
-
+app.use(express.static('../www'));
 //errores
 app.use(function(err, req, res, next) {
   console.error(err.stack);
