@@ -5,18 +5,17 @@
     .controller('NuevaPlanta', controller);
 
 
-  function controller($scope, routeSrv, misPlantasSrv) {
+  function controller($scope, routeSrv, misPlantasSrv, toastSrv) {
     $scope.data = {
       idPlanta: null,
       nombre: null,
       fechaNacimiento: new Date(),
       descripcion: ''
-    };
-
+    }
     $scope.goBack = goBack;
     $scope.insertPlanta = insertPlanta;
     //$scope.takePicture = takePicture;
-    console.log($scope);
+
     ////
 
     /*function takePicture() {
@@ -40,10 +39,12 @@
       if ($scope.nuevaPlantaForm.$valid) {
         console.log('insertando planta');
         misPlantasSrv.insertPlanta($scope.data).then(function (data){
-          console.log(data);
-          console.log('planta creada');
+          console.log(data)
+          toastSrv.success('planta creada');
+          routeSrv.go('app.mis-plantas.list');
         }).catch(function (err){
-          console.log(err.message);
+          console.log(err.data.message);
+          toastSrv.error(err.data.message || 'no se pudo crear planta');
         });
       } else {
         showErrors();
@@ -51,14 +52,14 @@
     }
     function showErrors() {
       if ($scope.nuevaPlantaForm.idPlanta.$invalid){
-        console.log('identificador de planta obligatorio');
+        toastSrv.error('identificador de planta obligatorio');
       } else if ($scope.nuevaPlantaForm.nombre.$invalid){
-        console.log('nombre de planta obligatorio');
+        toastSrv.error('nombre de planta obligatorio');
       } else if ($scope.nuevaPlantaForm.descripcion.$invalid) {
-        console.log('descripcion obligatoria');
+        toastSrv.error('descripcion obligatoria');
       }
       else{
-        console.log('formulario invalido');
+        toastSrv.error('formulario invalido');
       }
     }
 

@@ -36,7 +36,15 @@ router.get('/planta/datos',appController.plantaDatos);
 router.get('/user/new',appController.insertUser);
 router.get('/user/get/:id',appController.getUser);
 router.post('/user/login',appController.userLogin);
+router.post('/user/insert',appController.insertUser);
 router.post('/planta/new',appController.insertPlanta);
+router.get('/planta/registro',appController.insertRegistro);
+
 router.get('/planta/select/:idUser',appController.selectPlantas);
+router.get('/planta/get/:idUser/:idPlanta',appController.getPlanta);
+
+
+
+router.get('/pruebaDB',appController.pruebaDB);
 
 module.exports = router;

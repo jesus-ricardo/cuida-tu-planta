@@ -2,6 +2,7 @@ var express = require('express');
 var routes = require('../routes/index.js');
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
+var mongoDB = require('./libs/mongoDB.js');
 /*
 module.exports.selectFichero=function(req,res){
 	res.json(fichero);
@@ -116,12 +117,19 @@ module.exports.getIdMysql=function(req,res){
 	conect.end();
 }
 */
+mongoDB.conecta('localhost',27017,'plantas');
 module.exports.plantaDatos = plantaDatos;
 module.exports.insertUser = insertUser;
 module.exports.getUser  = getUser;
 module.exports.userLogin  = userLogin;
 module.exports.insertPlanta = insertPlanta;
 module.exports.selectPlantas = selectPlantas;
+module.exports.getPlanta = getPlanta;
+module.exports.insertRegistro = insertRegistro;
+module.exports.insertUser = insertUser;
+
+
+module.exports.pruebaDB = pruebaDB;
 
 //////
 
@@ -242,6 +250,69 @@ function selectPlantas(req, res) {
       console.log(result[0].plantas);
       res.json(result[0].plantas);
     });
+  });
+}
+
+function getPlanta(req, res) {
+  var idPlanta = req.params.idPlanta.toString();
+  var idUsuario = mongoDB.getObjectID(req.params.idUser);
+  if (idUsuario == null) {res.json({message: 'mal id usuario'}); return;}
+  console.log(idPlanta);
+  console.log(idUsuario);
+  mongoDB.find('user', {_id: idUsuario, "plantas.id": idPlanta},{'plantas.$': 1}).then(function (data){
+    console.log('then');
+    console.log(data);
+    res.json(data[0].plantas[0]);
+  }).catch(function (err){
+    console.log('error');
+    console.log(err);
+    res.json(err);return;
+  })
+}
+
+function insertRegistro(req, res) {
+  var data = req.body;
+  //datos de prueba
+  data.idPlanta = 222;
+  data.humedad = 30;
+  data.ph = 10;
+  data.luz = 300;
+  mongoDB.opera('insert', 'registro',{id: data.idPlanta,humedad: data.humedad,ph: data.ph, luz: data.luz,fecha: new Date()}).then(function(data){
+    console.log('insertado');
+    console.log(data);
+    res.json(data);return;
+  }).catch(function (err){
+    console.log('no insertado');
+    console.log(err);
+    res.json(err);return;
+  });
+}
+
+function insertUser(req, res) {
+
+  var data = req.body;
+  console.log(data);
+  mongoDB.opera('insert','user',{name: data.nombre, password: data.password, apellido1: data.apellido1,apellido2: data.apellido2,email: data.email, plantas: []})
+    .then(function data(){
+      console.log('usuario insertado correctamente');
+      res.json(data);return;
+    }).catch(function(err){
+    console.log('fallo al insertar usuario');
+    if (err.code == 11000){
+      res.status(400).json({message: 'nombre de usuario ya registrado'});
+    }
+    res.status(500).json(err);return;
+  })
+}
+
+
+function pruebaDB(req, res) {
+  mongoDB.conecta('localhost',27017,'plantas');
+  mongoDB.find('user', {_id: mongo.ObjectID("573b3cb013724b6c13a8a560")},{"plantas": 1, _id: 0}).then(function(data){
+    res.json(data[0].plantas);
+
+  }).catch(function(err){
+    res.json(err);return;
   });
 }
 

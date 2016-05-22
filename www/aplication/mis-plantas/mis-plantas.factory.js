@@ -4,7 +4,7 @@
   angular.module('app')
     .factory('misPlantasSrv', factory);
 
-  function factory($q, $http, $localStorage) {
+  function factory($q, $http, $localStorage, APPCONFIG) {
 
 
     return {
@@ -12,7 +12,8 @@
       get: get,
       getPicture: getPicture,
       insertPlanta: insertPlanta,
-      selectPlantas: selectPlantas
+      selectPlantas: selectPlantas,
+      getPlanta: getPlanta
       //
     };
 
@@ -65,12 +66,17 @@
     function insertPlanta(planta) {
       console.log('planta factory');
       console.log(planta);
-      return $http.post('http://localhost:7777/planta/new',{idUser: $localStorage.user._id, data: planta});
+      return $http.post(APPCONFIG.ipServer + '/planta/new',{idUser: $localStorage.user._id, data: planta});
     }
     function selectPlantas() {
-      return $http.get('http://localhost:7777/planta/select/' + $localStorage.user._id).then(function (res){
+      return $http.get(APPCONFIG.ipServer + '/planta/select/' + $localStorage.user._id).then(function (res){
           return res.data;
         });
+    }
+    function getPlanta(idPlanta) {
+      return $http.get(APPCONFIG.ipServer + '/planta/get/' + $localStorage.user._id+'/'+idPlanta).then(function (res){
+        return res.data;
+      });
     }
   }
 }());
