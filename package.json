@@ -31,6 +31,10 @@
     {
       "locator": "https://github.com/Telerik-Verified-Plugins/NativePageTransitions#0.6.2",
       "id": "com.telerik.plugins.nativepagetransitions"
+    },
+    {
+      "locator": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
+      "id": "cordova-plugin-x-toast"
     }
   ],
   "cordovaPlatforms": [

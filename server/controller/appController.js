@@ -126,6 +126,7 @@ module.exports.insertPlanta = insertPlanta;
 module.exports.selectPlantas = selectPlantas;
 module.exports.getPlanta = getPlanta;
 module.exports.insertRegistro = insertRegistro;
+module.exports.insertUser = insertUser;
 
 
 module.exports.pruebaDB = pruebaDB;
@@ -285,6 +286,23 @@ function insertRegistro(req, res) {
     console.log(err);
     res.json(err);return;
   });
+}
+
+function insertUser(req, res) {
+
+  var data = req.body;
+  console.log(data);
+  mongoDB.opera('insert','user',{name: data.nombre, password: data.password, apellido1: data.apellido1,apellido2: data.apellido2,email: data.email, plantas: []})
+    .then(function data(){
+      console.log('usuario insertado correctamente');
+      res.json(data);return;
+    }).catch(function(err){
+    console.log('fallo al insertar usuario');
+    if (err.code == 11000){
+      res.status(400).json({message: 'nombre de usuario ya registrado'});
+    }
+    res.status(500).json(err);return;
+  })
 }
 
 

@@ -1,8 +1,10 @@
-<ion-view view-title="Inicio">
+<ion-view view-title="Login - Registro">
   <form name="loginForm">
   <ion-content class="padding has-header">
     <div>
-      <div class="list">
+      <button ng-if="!loguear" ng-click="setLoguear()" class="button button-block button-balanced">Login</button>
+      <button ng-if="loguear" ng-click="setRegistro()" class="button button-block button-balanced">Registrarse</button>
+      <div ng-if="loguear" class="list">
         <label class="item item-input">
           <input ng-model="data.nombre" name="nombre" required type="text" placeholder="Nombre">
         </label>
@@ -10,6 +12,35 @@
           <input ng-model="data.password" name="password" required type="password" placeholder="Contraseña">
         </label>
         <button
+          ng-click="login()"
+          class="button button-block button-balanced">
+          Entrar
+        </button>
+      </div>
+      <div ng-if="!loguear" class="list">
+        <label class="item item-input">
+          <input ng-model="registroData.nombre" name="nombreRegistro" required type="text" placeholder="Nombre *">
+        </label>
+        <label class="item item-input">
+          <input ng-model="registroData.apellido1" name="apellido1Registro" required type="text" placeholder="Primer Apellido *">
+        </label>
+        <label class="item item-input">
+          <input ng-model="registroData.apellido2" name="apellido2Registro" type="text" placeholder="Segundo Apellido">
+        </label>
+        <label class="item item-input">
+          <input ng-model="registroData.email" name="emailRegistro" required type="email" placeholder="Correo *">
+        </label>
+        <label class="item item-input">
+          <input ng-model="registroData.password" name="passwordRegistro" required type="password" placeholder="Contraseña *">
+        </label>
+        <button
+          ng-if="!loguear"
+          ng-click="registrar()"
+          class="button button-block button-balanced">
+          Crear cuenta
+        </button>
+        <button
+          ng-if="loguear"
           ng-click="login()"
           class="button button-block button-balanced">
           Entrar

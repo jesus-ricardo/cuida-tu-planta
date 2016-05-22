@@ -6,6 +6,7 @@
 
   function config($stateProvider) {
     $stateProvider.state('app.mis-plantas.list', {
+      cache: false,
       url: '/list',
       templateUrl: 'aplication/mis-plantas/list/mis-plantas.list.html',
       controller: 'MisPlantas',

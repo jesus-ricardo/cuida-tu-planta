@@ -5,7 +5,7 @@
     .controller('NuevaPlanta', controller);
 
 
-  function controller($scope, routeSrv, misPlantasSrv) {
+  function controller($scope, routeSrv, misPlantasSrv, toastSrv) {
     $scope.data = {
       idPlanta: null,
       nombre: null,
@@ -40,9 +40,11 @@
         console.log('insertando planta');
         misPlantasSrv.insertPlanta($scope.data).then(function (data){
           console.log(data)
-          console.log('planta creada');
+          toastSrv.success('planta creada');
+          routeSrv.go('app.mis-plantas.list');
         }).catch(function (err){
-          console.log(err.message);
+          console.log(err.data.message);
+          toastSrv.error(err.data.message || 'no se pudo crear planta');
         });
       } else {
         showErrors();
@@ -50,14 +52,14 @@
     }
     function showErrors() {
       if ($scope.nuevaPlantaForm.idPlanta.$invalid){
-        console.log('identificador de planta obligatorio');
+        toastSrv.error('identificador de planta obligatorio');
       } else if ($scope.nuevaPlantaForm.nombre.$invalid){
-        console.log('nombre de planta obligatorio');
+        toastSrv.error('nombre de planta obligatorio');
       } else if ($scope.nuevaPlantaForm.descripcion.$invalid) {
-        console.log('descripcion obligatoria');
+        toastSrv.error('descripcion obligatoria');
       }
       else{
-        console.log('formulario invalido');
+        toastSrv.error('formulario invalido');
       }
     }
 

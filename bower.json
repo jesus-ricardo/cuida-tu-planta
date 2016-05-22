@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "ngstorage": "^0.3.10",
-    "ionic-native-transitions": "shprink/ionic-native-transitions#^1.0.0-rc9"
+    "ionic-native-transitions": "shprink/ionic-native-transitions#^1.0.0-rc9",
+    "angular-toastr": "^1.7.0",
+    "ngCordova": "^0.1.26-alpha"
   }
 }

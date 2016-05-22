@@ -29,7 +29,7 @@ function find(colect, query, projection) {
         var collection = db.collection(colect);
 
         collection.find(query, projection).toArray(function(err, result) {
-          if (err){reject({message: 'no se pudo hacer la query'})}
+          if (err){reject(err)}
           resolve(result);
         });
       });
@@ -65,7 +65,7 @@ function opera(accion, colect,query, projection) {
       var collection = db.collection(colect);
       if (accion == 'insert'){
         collection[accion](query, projection,function(err, result) {
-          if (err){reject({message: 'no se pudo hacer la query'})}
+          if (err){reject(err)}
           resolve(result);
         });
       } else{
