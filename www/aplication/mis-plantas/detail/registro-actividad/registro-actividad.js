@@ -4,8 +4,9 @@
   angular.module('app')
     .controller('RegistroActividad', controller);
 
-  function controller($scope, routeSrv, planta, misPlantasSrv) {
+  function controller($scope, routeSrv, planta, misPlantasSrv, toastSrv) {
     $scope.goBack = goBack;
+    $scope.update = update;
     $scope.planta = planta;
     console.log(planta);
 
@@ -20,6 +21,13 @@
     ////
     function goBack() {
       routeSrv.go('app.mis-plantas.detail',{id: planta.id});
+    }
+    function update(){
+      toastSrv.confirm('confirmacíón','¿Guardar registro?').then(function (res){
+        if(res){
+
+        }
+      });
     }
   }
 }());

@@ -34,7 +34,7 @@
         cancelText: 'No', // String (default: 'Cancel'). The text of the Cancel button.
         cancelType: '', // String (default: 'button-default'). The type of the Cancel button.
         okText: 'Si', // String (default: 'OK'). The text of the OK button.
-        okType: 'button-acttiv' // String (default: 'button-positive'). The type of the OK button.
+        okType: 'button-balanced' // String (default: 'button-positive'). The type of the OK button.
       });
     }
 
