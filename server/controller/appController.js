@@ -125,6 +125,7 @@ module.exports.userLogin  = userLogin;
 module.exports.insertPlanta = insertPlanta;
 module.exports.selectPlantas = selectPlantas;
 module.exports.getPlanta = getPlanta;
+module.exports.insertRegistro = insertRegistro;
 
 
 module.exports.pruebaDB = pruebaDB;
@@ -268,7 +269,23 @@ function getPlanta(req, res) {
   })
 }
 
-
+function insertRegistro(req, res) {
+  var data = req.body;
+  //datos de prueba
+  data.idPlanta = 222;
+  data.humedad = 30;
+  data.ph = 10;
+  data.luz = 300;
+  mongoDB.opera('insert', 'registro',{id: data.idPlanta,humedad: data.humedad,ph: data.ph, luz: data.luz,fecha: new Date()}).then(function(data){
+    console.log('insertado');
+    console.log(data);
+    res.json(data);return;
+  }).catch(function (err){
+    console.log('no insertado');
+    console.log(err);
+    res.json(err);return;
+  });
+}
 
 
 function pruebaDB(req, res) {
