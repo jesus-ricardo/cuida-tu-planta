@@ -272,12 +272,15 @@ function getPlanta(req, res) {
 
 function insertRegistro(req, res) {
   var data = req.body;
+  console.log(req);
   //datos de prueba
   data.idPlanta = 222;
   data.humedad = 30;
   data.ph = 10;
   data.luz = 300;
-  mongoDB.opera('insert', 'registro',{id: data.idPlanta,humedad: data.humedad,ph: data.ph, luz: data.luz,fecha: new Date()}).then(function(data){
+  mongoDB.opera('insert', 'registro',{
+    id: data.idPlanta,humedad: data.humedad,ph: data.ph, luz: data.luz,fecha: new Date()})
+    .then(function(data){
     console.log('insertado');
     console.log(data);
     res.json(data);return;

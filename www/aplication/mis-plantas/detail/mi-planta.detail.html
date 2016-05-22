@@ -1,21 +1,41 @@
 <ion-view view-title="{{planta.nombre}}">
   <ion-nav-buttons side="left">
-    <button class="button button-icon button-clear ion-ios-arrow-back"
-            ng-click="goBack()"></button>
+  <button class="button button-icon button-clear ion-ios-arrow-back"
+          ng-click="goBack()"></button>
+</ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-ios-pulse-strong"
+            ng-click=""></button>
   </ion-nav-buttons>
 
   <ion-content class="padding has-header">
 
     <div class="list card">
+
+      <ion-item class="item item-divider item-balanced">
+        Estado actual de {{planta.nombre}}
+      </ion-item>
       <div class="item item-body">
         <img class="full-image" src="aplication/core/images/poto1.jpg">
-        <h2>{{planta.nombre}}</h2>
+        <div class="list card">
+          <ion-item class="item item-divider">
+            Descripción
+          </ion-item>
         <p>
           {{planta.descripcion || 'Descripción no disponible'}}
         </p>
+          </div>
+        <p>
+        <a class="subdued">animación de Humedad</a> &&
+        <a class="subdued">animación temperatura</a>
+      </p>
       </div>
-
     </div>
-
   </ion-content>
+  <div class="tabs tabs-balanced">
+    <a ng-click="goRegistro()"
+      class="tab-item tab-balanced">
+      Nuevo registro
+    </a>
+  </div>
 </ion-view>

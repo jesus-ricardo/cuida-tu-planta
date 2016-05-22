@@ -1,0 +1,49 @@
+<ion-view view-title="{{planta.nombre}}">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-ios-arrow-back"
+            ng-click="goBack()"></button>
+  </ion-nav-buttons>
+  <form name="registroForm">
+    <ion-content>
+          <ion-item class="item item-icon-left">
+            <i class="icon ion-waterdrop"></i>
+            Humedad
+          <span class="item-note">
+            {{data.humedad}}%
+          </span>
+          </ion-item>
+          <ion-item class="item item-icon-left">
+            <i class="icon ion-thermometer"></i>
+            Temperatura
+          <span class="item-note">
+            {{data.temperatura}}º
+          </span>
+          </ion-item>
+          <ion-item class="item item-icon-left">
+            <i class="icon ion-ios-sunny-outline"></i>
+            Luz
+          <span class="item-note">
+            {{data.luz}}lux
+          </span>
+          </ion-item>
+          <ion-item class="item item-icon-left">
+            <i class="icon ion-ios-flask-outline"></i>
+            Ph
+          <span class="item-note">
+            {{data.ph}}ph
+          </span>
+          </ion-item>
+          <ion-item class="item item-icon-left">
+            <i class="icon ion-android-calendar"></i>
+            Fecha
+          <span class="item-note">
+            {{data.fecha}}
+          </span>
+          </ion-item>
+          <expand-textarea label="Nota" name="nota" required
+                           expand-model="data.nota"
+                           placeholder="Introduzca aquí su nota"></expand-textarea>
+
+    </ion-content>
+  </form>
+</ion-view>

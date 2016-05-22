@@ -26,6 +26,7 @@
       if ($scope.loginForm.$valid) {
         usuarioSrv.login($scope.data).then(function (user) {
           $localStorage.user = user[0];
+          console.log(user[0]);
           toastSrv.success('login realizado');
           routeSrv.go('app.mis-plantas.list');
         }).catch(function () {
