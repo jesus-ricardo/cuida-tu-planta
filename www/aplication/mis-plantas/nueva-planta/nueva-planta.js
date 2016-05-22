@@ -19,30 +19,29 @@
     ////
 
     /*function takePicture() {
-      var options = {
-        quality: 75,
-        targetWidth: 200,
-        targetHeight: 200,
-        sourceType: 1
-      };
+     var options = {
+     quality: 75,
+     targetWidth: 200,
+     targetHeight: 200,
+     sourceType: 1
+     };
 
-      misPlantasSrv.getPicture(options).then(function (imageData) {
-        $scope.picture = imageData;
-      }, function (err) {
-        console.log(err);
-      });
+     misPlantasSrv.getPicture(options).then(function (imageData) {
+     $scope.picture = imageData;
+     }, function (err) {
+     console.log(err);
+     });
 
-    }*/
+     }*/
 
     function insertPlanta() {
-      console.log($scope.nuevaPlantaForm);
+
       if ($scope.nuevaPlantaForm.$valid) {
-        console.log('insertando planta');
-        misPlantasSrv.insertPlanta($scope.data).then(function (data){
-          console.log(data)
+
+        misPlantasSrv.insertPlanta($scope.data).then(function () {
           toastSrv.success('planta creada');
           routeSrv.go('app.mis-plantas.list');
-        }).catch(function (err){
+        }).catch(function (err) {
           console.log(err.data.message);
           toastSrv.error(err.data.message || 'no se pudo crear planta');
         });
@@ -50,15 +49,16 @@
         showErrors();
       }
     }
+
     function showErrors() {
-      if ($scope.nuevaPlantaForm.idPlanta.$invalid){
+      if ($scope.nuevaPlantaForm.idPlanta.$invalid) {
         toastSrv.error('identificador de planta obligatorio');
-      } else if ($scope.nuevaPlantaForm.nombre.$invalid){
+      } else if ($scope.nuevaPlantaForm.nombre.$invalid) {
         toastSrv.error('nombre de planta obligatorio');
       } else if ($scope.nuevaPlantaForm.descripcion.$invalid) {
         toastSrv.error('descripcion obligatoria');
       }
-      else{
+      else {
         toastSrv.error('formulario invalido');
       }
     }

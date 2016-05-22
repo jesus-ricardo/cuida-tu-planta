@@ -5,14 +5,13 @@
     .controller('MiPlantaDetail', controller);
 
   function controller($scope, routeSrv, planta) {
-    console.log(planta);
     $scope.goBack = goBack;
     $scope.planta = planta;
 
 
-   ////
-    function goBack(){
-    routeSrv.go('app.mis-plantas.list');
+    ////
+    function goBack() {
+      routeSrv.go('app.mis-plantas.list');
     }
   }
 }());

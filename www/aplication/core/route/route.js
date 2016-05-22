@@ -51,7 +51,7 @@
       } else if (ionic.Platform.is('browser')) {
         go('app.mis-plantas.list', {}, {direction: 'up'});
       } else {
-            ionic.Platform.exitApp();
+        ionic.Platform.exitApp();
       }
     }
 

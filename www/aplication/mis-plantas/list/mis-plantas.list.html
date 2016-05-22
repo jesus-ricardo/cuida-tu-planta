@@ -7,12 +7,13 @@
   <ion-content class="padding has-header">
     <div class="list">
 
-      <a ng-click="goDetail(planta.id)" ng-repeat="planta in plantas" class="item item-thumbnail-left">
-        <img  class="full-image" src="aplication/core/images/poto1.jpg">
+      <a ng-click="goDetail(planta.id)" ng-repeat="planta in plantas"
+         class="item item-thumbnail-left">
+        <img class="full-image" src="aplication/core/images/poto1.jpg">
         <h2>{{planta.nombre}}</h2>
         <p>{{planta.descripcion || 'No disponible'}}</p>
       </a>
-      </div>
+    </div>
     <!--<div class="row">
       <div ng-click="goDetail()"
         class="col col-50">

@@ -23,22 +23,21 @@
     $scope.setRegistro = setRegistro;
 
     function login() {
-      console.log($scope.loginForm);
-      if ($scope.loginForm.$valid){
-        usuarioSrv.login($scope.data).then(function (user){
-          $localStorage.user = user.data[0];
-          console.log(user.data[0]);
+      if ($scope.loginForm.$valid) {
+        usuarioSrv.login($scope.data).then(function (user) {
+          $localStorage.user = user[0];
           toastSrv.success('login realizado');
           routeSrv.go('app.mis-plantas.list');
-        }).catch(function (err){
+        }).catch(function () {
           toastSrv.error('Login falló');
         });
-      } else{
+      } else {
         showErrors();
       }
     }
+
     function showErrors() {
-      if ($scope.loginForm.nombre.$invalid){
+      if ($scope.loginForm.nombre.$invalid) {
         toastSrv.error('usuario obligatorio');
       } else if ($scope.loginForm.password.$invalid) {
         toastSrv.error('contraseña obligatoria');
@@ -46,21 +45,23 @@
         toastSrv.error('formulario invalido');
       }
     }
+
     function registrar() {
-      if ($scope.loginForm.$valid){
-        usuarioSrv.insertUsuario($scope.registroData).then(function (data){
+      if ($scope.loginForm.$valid) {
+        usuarioSrv.insertUsuario($scope.registroData).then(function (data) {
           toastSrv.success('cuenta creada');
-        }).catch(function (err){
+        }).catch(function (err) {
           console.log(err);
-          toastSrv.error(err.data.message || 'fallo al crear la cuenta');
+          toastSrv.error(err.data.message || 'Fallo al crear la cuenta');
         })
       } else {
         showErrorsRegistro();
       }
     }
+
     function showErrorsRegistro() {
-      if ($scope.loginForm.nombreRegistro.$invalid){
-        toastSrv.error('usuario obligatorio');
+      if ($scope.loginForm.nombreRegistro.$invalid) {
+        toastSrv.error('Usuario obligatorio');
       } else if ($scope.loginForm.apellido1Registro.$invalid) {
         toastSrv.error('Primer apellido obligatorio');
       } else if ($scope.loginForm.apellido2Registro.$invalid) {
@@ -68,14 +69,16 @@
       } else if ($scope.loginForm.emailRegistro.$invalid) {
         toastSrv.error('Email invalido');
       } else if ($scope.loginForm.passwordRegistro.$invalid) {
-        toastSrv.error('contraseña obligatoria');
+        toastSrv.error('Contraseña obligatoria');
       } else {
-        toastSrv.error('formulario invalido');
+        toastSrv.error('Formulario inválido');
       }
     }
-    function setLoguear(){
+
+    function setLoguear() {
       $scope.loguear = true;
     }
+
     function setRegistro() {
       $scope.loguear = false;
     }

@@ -15,8 +15,6 @@
       }
     });
     $rootScope.$on('$stateChangeStart', function (event, toState) {
-      console.log('cambio el estado');
-      console.log(toState);
       if ($localStorage.user == null && toState.name != 'app.usuario.login') {
         event.preventDefault();
         routeSrv.go('app.usuario.login');
