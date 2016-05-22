@@ -11,11 +11,12 @@
       nombre: null,
       fechaNacimiento: new Date(),
       descripcion: ''
-    }
+    };
+
     $scope.goBack = goBack;
     $scope.insertPlanta = insertPlanta;
     //$scope.takePicture = takePicture;
-
+    console.log($scope);
     ////
 
     /*function takePicture() {
@@ -39,7 +40,7 @@
       if ($scope.nuevaPlantaForm.$valid) {
         console.log('insertando planta');
         misPlantasSrv.insertPlanta($scope.data).then(function (data){
-          console.log(data)
+          console.log(data);
           console.log('planta creada');
         }).catch(function (err){
           console.log(err.message);

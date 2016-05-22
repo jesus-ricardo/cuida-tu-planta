@@ -22,9 +22,7 @@
         <span class="input-label">Fecha de nacimiento</span>
         <input ng-model="data.fechaNacimiento" name="fechaNacimiento" type="date">
       </label>
-      <label class="item item-input">
-        <textarea name="descripcion" required ng-model="data.descripcion" placeholder="Descripción"></textarea>
-      </label>
+        <expand-textarea label="Descripción" name="descripcion" required expand-model="data.descripcion" placeholder="Introduzca aquí su descripcion"></expand-textarea>
       <button
         ng-click="insertPlanta()"
         class="button button-block button-balanced">
