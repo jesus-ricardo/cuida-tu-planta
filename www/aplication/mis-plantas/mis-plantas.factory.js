@@ -35,20 +35,14 @@
     }
 
     function selectPlantas() {
-      return httpSrv.get('/planta/select/' + $localStorage.user._id).then(function (res) {
-        return res;
-      });
+      return httpSrv.get('/planta/select/' + $localStorage.user._id);
     }
 
     function getPlanta(idPlanta) {
-      return httpSrv.get('/planta/get/' + $localStorage.user._id + '/' + idPlanta).then(function (res) {
-        return res;
-      });
+      return httpSrv.get('/planta/get/' + $localStorage.user._id + '/' + idPlanta);
     }
     function insertRegistro() {
-      return httpSrv.get('/planta/registro' + $localStorage.user._id + '/' + idPlanta).then(function (res) {
-        return res;
-      });
+      return httpSrv.get('/planta/registro' + $localStorage.user._id + '/' + idPlanta);
     }
   }
 }());
