@@ -40,6 +40,11 @@
   <link rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.css">
   <!-- endinject -->
 
+  <!-- google charts api -->
+  <!--Load the AJAX API-->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
   <!-- inject:js -->
 
   <script src="aplication/core/app/app.js"></script>
@@ -47,12 +52,6 @@
   <script src="aplication/mis-plantas/detail/registro-actividad/registro-actividad.route.js"></script>
 
   <script src="aplication/mis-plantas/detail/registro-actividad/registro-actividad.js"></script>
-
-  <script src="aplication/mis-plantas/detail/mi-planta.detail.route.js"></script>
-
-  <script src="aplication/mis-plantas/detail/mi-planta.detail.js"></script>
-
-  <script src="aplication/core/toast/toastSrv.js"></script>
 
   <script src="aplication/usuario/login/login.route.js"></script>
 
@@ -62,21 +61,29 @@
 
   <script src="aplication/mis-plantas/nueva-planta/nueva-planta.js"></script>
 
+  <script src="aplication/mis-plantas/detail/mi-planta.detail.route.js"></script>
+
+  <script src="aplication/mis-plantas/detail/mi-planta.detail.js"></script>
+
   <script src="aplication/mis-plantas/list/mis-plantas.list.route.js"></script>
 
   <script src="aplication/mis-plantas/list/mis-plantas.list.js"></script>
 
+  <script src="aplication/core/route/route.js"></script>
+
   <script src="aplication/core/state/change.js"></script>
 
-  <script src="aplication/core/route/route.js"></script>
+  <script src="aplication/core/toast/toastSrv.js"></script>
 
   <script src="aplication/core/http/http.factory.js"></script>
 
   <script src="aplication/core/config/configuracionBasica.js"></script>
 
-  <script src="aplication/core/auto-expand/auto-expand.directive.js"></script>
+  <script src="aplication/core/config/config.run.js"></script>
 
   <script src="aplication/core/app/app.route.js"></script>
+
+  <script src="aplication/core/auto-expand/auto-expand.directive.js"></script>
 
   <script src="aplication/usuario/usuario.route.js"></script>
 
@@ -89,6 +96,10 @@
   <script src="aplication/inicio/inicio.route.js"></script>
 
   <script src="aplication/inicio/inicio.js"></script>
+
+  <script src="aplication/configuracion/configuracion.route.js"></script>
+
+  <script src="aplication/configuracion/configuracion.js"></script>
 
   <!-- endinject -->
 </head>

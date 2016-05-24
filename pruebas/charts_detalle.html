@@ -1,22 +1,9 @@
-(function () {
-  'use strict';
-
-  angular.module('app')
-    .controller('MiPlantaDetail', controller);
-
-  function controller($scope, routeSrv, planta) {
-    $scope.goBack = goBack;
-    $scope.goRegistro = goRegistro;
-    $scope.planta = planta;
-    ////
-    function goRegistro(){
-      routeSrv.go('app.mis-plantas.registro-actividad',{id: planta.id});
-    }
-    function goBack() {
-      routeSrv.go('app.mis-plantas.list');
-    }
-
-    //google charts
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
@@ -29,14 +16,14 @@
 
       var view = new google.visualization.DataView(data);
       view.setColumns([0, 1,
-        { calc: "stringify",
-          sourceColumn: 1,
-          type: "string",
-          role: "annotation" },
-        2]);
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
 
       var options = {
-        title: "Niveles de la planta",
+        title: "Density of Precious Metals, in g/cm^3",
         width: 600,
         height: 400,
         bar: {groupWidth: "95%"},
@@ -44,8 +31,12 @@
       };
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
-    }
-
-
   }
-}());
+  </script>
+  </head>
+
+  <body>
+<!--Div that will hold the pie chart-->
+    <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+  </body>
+</html>

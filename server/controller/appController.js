@@ -127,7 +127,7 @@ module.exports.selectPlantas = selectPlantas;
 module.exports.getPlanta = getPlanta;
 module.exports.insertRegistro = insertRegistro;
 module.exports.insertUser = insertUser;
-
+module.exports.insertFotoPrincipalPlanta = insertFotoPrincipalPlanta;
 
 module.exports.pruebaDB = pruebaDB;
 
@@ -306,6 +306,12 @@ function insertUser(req, res) {
     }
     res.status(500).json(err);return;
   })
+}
+
+function insertFotoPrincipalPlanta(req, res) {
+  var file = req.file;
+  console.log(file);
+  res.status(200).json({message: 'foto recibida'});return;
 }
 
 

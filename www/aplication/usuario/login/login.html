@@ -3,10 +3,10 @@
     <ion-content class="padding has-header">
       <div>
         <button ng-if="!loguear" ng-click="setLoguear()"
-                class="button button-block button-balanced">Login
+                class="button button-block button-{{tema}}">Login
         </button>
         <button ng-if="loguear" ng-click="setRegistro()"
-                class="button button-block button-balanced">Registrarse
+                class="button button-block button-{{tema}}">Registrarse
         </button>
         <div ng-if="loguear" class="list">
           <label class="item item-input">
@@ -19,7 +19,7 @@
           </label>
           <button
             ng-click="login()"
-            class="button button-block button-balanced">
+            class="button button-block button-{{tema}}">
             Entrar
           </button>
         </div>
@@ -47,13 +47,13 @@
           <button
             ng-if="!loguear"
             ng-click="registrar()"
-            class="button button-block button-balanced">
+            class="button button-block button-{{tema}}">
             Crear cuenta
           </button>
           <button
             ng-if="loguear"
             ng-click="login()"
-            class="button button-block button-balanced">
+            class="button button-block button-{{tema}}">
             Entrar
           </button>
         </div>

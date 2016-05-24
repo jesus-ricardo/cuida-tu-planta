@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+//multer
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
 /*
 var fichero = require('../array.json');
 var connection = require("../controller/utils/create-connection.js");
@@ -42,7 +45,7 @@ router.get('/planta/registro',appController.insertRegistro);
 
 router.get('/planta/select/:idUser',appController.selectPlantas);
 router.get('/planta/get/:idUser/:idPlanta',appController.getPlanta);
-
+router.post('/upload', upload.single('planta'),appController.insertFotoPrincipalPlanta);
 
 
 router.get('/pruebaDB',appController.pruebaDB);
