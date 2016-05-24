@@ -262,7 +262,7 @@ function getPlanta(req, res) {
   mongoDB.find('user', {_id: idUsuario, "plantas.id": idPlanta},{'plantas.$': 1}).then(function (data){
     console.log('then');
     console.log(data);
-    res.json(data[0].plantas[0]);
+    res.status(200).json(data[0].plantas[0]);return;
   }).catch(function (err){
     console.log('error');
     console.log(err);

@@ -9,12 +9,7 @@
       cache: false,
       url: '/nueva-planta/',
       templateUrl: '/aplication/mis-plantas/nueva-planta/nueva-planta.html',
-      controller: 'NuevaPlanta',
-      resolve: {
-        // planta: function (misPlantasSrv) {
-        //   return misPlantasSrv.get();
-        // }
-      }
+      controller: 'NuevaPlanta'
     });
   }
 }());

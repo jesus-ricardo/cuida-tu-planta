@@ -4,9 +4,10 @@
   angular
     .module('app')
     .run(run);
-  function run($rootScope, $ionicPopup, routeSrv, $localStorage) {
+  function run($rootScope, $ionicPopup, routeSrv, $localStorage, toastSrv) {
     $rootScope.$on('$stateChangeError', function (event, a1, a2, a3, a4, err) {
       console.log(err);
+      toastSrv.error(JSON.stringify(err));
       if (err.status == -1) {
         $ionicPopup.alert({
           title: 'Compruebe su conexión',

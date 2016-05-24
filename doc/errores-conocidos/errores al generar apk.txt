@@ -1,0 +1,2 @@
+ionic resources not found splash.png or icon.png
+http://stackoverflow.com/questions/30532379/bug-splash-and-icon-generator-not-working-ionic-and-cordova

@@ -5,34 +5,18 @@
     .controller('NuevaPlanta', controller);
 
 
-  function controller($scope, routeSrv, misPlantasSrv, toastSrv) {
+  function controller($scope, $state, misPlantasSrv, toastSrv) {
     $scope.data = {
       idPlanta: null,
       nombre: null,
       fechaNacimiento: new Date(),
       descripcion: ''
-    }
+    };
     $scope.goBack = goBack;
     $scope.insertPlanta = insertPlanta;
     //$scope.takePicture = takePicture;
 
     ////
-
-    /*function takePicture() {
-     var options = {
-     quality: 75,
-     targetWidth: 200,
-     targetHeight: 200,
-     sourceType: 1
-     };
-
-     misPlantasSrv.getPicture(options).then(function (imageData) {
-     $scope.picture = imageData;
-     }, function (err) {
-     console.log(err);
-     });
-
-     }*/
 
     function insertPlanta() {
 
@@ -64,7 +48,8 @@
     }
 
     function goBack() {
-      routeSrv.go('app.mis-plantas.list');
+      toastSrv.warn('pa atras');
+      $state.go('app.mis-plantas.list');
     }
   }
 }());

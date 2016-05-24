@@ -6,7 +6,11 @@
   </ion-nav-buttons>
   <ion-content class="padding has-header">
     <div class="list">
-
+      <a href="#app/mis-plantas/nueva-planta"
+         native-ui-sref="app.mis-plantas.nueva-planta"
+         native-options="{type: 'slide', direction:'down'}">
+        nueva planta
+      </a>
       <a ng-click="goDetail(planta.id)" ng-repeat="planta in plantas"
          class="item item-thumbnail-left">
         <img class="full-image" src="aplication/core/images/poto1.jpg">
