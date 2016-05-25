@@ -17,6 +17,10 @@ ionic resources
 
 set up server and database
 
+`cd server`
+
+`npm install`
+
 node server/app
 
 mongod --dbpath C:\mongodb\data
