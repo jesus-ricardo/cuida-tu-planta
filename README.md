@@ -1,11 +1,11 @@
 # planta-arduino
 aplicación móvil para monitorizar tus plantaciones.
 
-Install
+## Download
 
 `git clone https://github.com/jesus-ricardo/planta-arduino.git`
 
-Set up
+## Set up client
 
 `npm install`
 
@@ -15,7 +15,7 @@ Set up
 
 `ionic resources`
 
-set up server
+ ## set up server
 
 `cd server`
 
@@ -23,7 +23,7 @@ set up server
 
 `node app`
 
-Set up Data base
+## Set up Data base
 
 `mongod --dbpath C:\mongodb\data`
 
