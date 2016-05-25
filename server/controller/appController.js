@@ -3,6 +3,7 @@ var routes = require('../routes/index.js');
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
 var mongoDB = require('./libs/mongoDB.js');
+var fs = require('fs');
 /*
 module.exports.selectFichero=function(req,res){
 	res.json(fichero);
@@ -311,7 +312,27 @@ function insertUser(req, res) {
 function insertFotoPrincipalPlanta(req, res) {
   var file = req.file;
   console.log(file);
-  res.status(200).json({message: 'foto recibida'});return;
+  var filePath = req.file.filename + '.jpg';
+  fs.rename('./uploads/'+req.file.filename, './uploads/'+filePath, function (err) {
+    if (err) throw err;
+    console.log(filePath);
+    console.log('body');
+    console.log(req.body);
+    var data = req.body;
+    var idUsuario = mongoDB.getObjectID(data.idUsuario);
+    console.log('vamos');
+
+    mongoDB.opera('update','user',{_id: idUsuario, "plantas.id": data.idPlanta},{"$set": {"plantas.$.fotoPerfil": filePath}}).then(function (data){
+      console.log(data);
+      res.status(200).json({message: 'foto recibida'});return;
+    }).catch(function (err){
+      console.log(err);
+      res.status(500).json({message: 'error al subir foto'});return;
+    });
+  });
+
+  //db.user.update({name: 'juan', "plantas.idPlanta": 2},{$set: {"plantas.$.fotoPerfil": 'fotop'}});
+
 }
 
 

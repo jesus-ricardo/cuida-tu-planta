@@ -4,10 +4,11 @@
   angular.module('app')
     .controller('MiPlantaDetail', controller);
 
-  function controller($scope, routeSrv, planta) {
+  function controller($scope, routeSrv, planta, APPCONFIG) {
     $scope.goBack = goBack;
     $scope.goRegistro = goRegistro;
     $scope.planta = planta;
+    $scope.getUrlPlanta = getUrlPlanta;
     ////
     function goRegistro(){
       routeSrv.go('app.mis-plantas.registro-actividad',{id: planta.id});
@@ -15,9 +16,14 @@
     function goBack() {
       routeSrv.go('app.mis-plantas.list');
     }
+    function getUrlPlanta(fotoPerfil){
+      if (fotoPerfil == null) {return null};
+      console.log(APPCONFIG.ipServer+'/'+fotoPerfil);
+      return APPCONFIG.ipServer+'/'+fotoPerfil;
+    }
 
     //google charts
-    google.charts.load("current", {packages:['corechart']});
+    /*google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
@@ -44,7 +50,7 @@
       };
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
-    }
-    
+    }*/
+
   }
 }());

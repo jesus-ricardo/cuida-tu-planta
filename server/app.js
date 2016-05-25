@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 8888;        // set our port
 app.use(express.static('../www'));
+app.use(express.static('uploads'));
 //errores
 app.use(function(err, req, res, next) {
   console.error(err.stack);

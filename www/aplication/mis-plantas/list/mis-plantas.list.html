@@ -13,7 +13,7 @@
       </a>
       <a ng-click="goDetail(planta.id)" ng-repeat="planta in plantas"
          class="item item-thumbnail-left">
-        <img class="full-image" src="aplication/core/images/poto1.jpg">
+        <img class="full-image" ng-src="{{getUrlPlanta(planta.fotoPerfil) || 'aplication/core/images/poto1.jpg' }}">
         <h2>{{planta.nombre}}</h2>
         <p>{{planta.descripcion || 'No disponible'}}</p>
       </a>
