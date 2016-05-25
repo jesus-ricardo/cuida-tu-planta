@@ -23,6 +23,8 @@ aplicación móvil para monitorizar tus plantaciones.
 
 `node app`
 
+default port is *8888*
+
 ## Set up Data base
 
 `mongod --dbpath C:\mongodb\data`
