@@ -15,7 +15,7 @@ aplicación móvil para monitorizar tus plantaciones.
 
 `ionic resources`
 
- ## set up server
+## Set up server
 
 `cd server`
 
