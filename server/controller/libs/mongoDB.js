@@ -63,7 +63,7 @@ function opera(accion, colect,query, projection) {
     MongoClient.connect(urlConexion, function(err, db) {
       if(err) { reject({message: 'error al conectar'}) }
       var collection = db.collection(colect);
-      if (accion == 'insert'){
+      if (accion == 'insert' ||accion == 'update'){
         collection[accion](query, projection,function(err, result) {
           if (err){reject(err)}
           resolve(result);
