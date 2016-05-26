@@ -5,6 +5,7 @@ module.exports.conecta = conecta;
 module.exports.find = find;
 module.exports.getObjectID = getObjectID;
 module.exports.opera = opera;
+module.exports.extraer = extraer;
 
 var host = null;
 var port = null;
@@ -53,6 +54,52 @@ function insert(colect, query, projection) {
     });
   });
 
+}
+function extraer(colect, query, ordenado) {
+  console.log('1');
+  return new Promise(function (resolve, reject) {
+    if (urlConexion == null) {
+      reject({messaje: 'conexión no esta definida'});
+    }
+    console.log(urlConexion);
+    MongoClient.connect(urlConexion, function(err, db) {
+      if(err) { reject({message: 'error al conectar'}) }
+      var collection = db.collection(colect);
+      console.log('2');
+      var cursor = collection.find(query);
+      cursor.sort(ordenado);
+      cursor.limit(1);
+      //Skip specified records. 0 for skipping 0 records.
+      cursor.skip(0);
+      //Lets iterate on the result
+      cursor.each(function (err, doc) {
+        if (err) {
+          console.log(err);
+        } else {
+          resolve(doc);
+        }
+      });
+    });
+  });
+  /*  var cursor = collection.find(query);
+   cursor.sort(ordenado);
+
+   cursor.limit(1);
+
+   //Skip specified records. 0 for skipping 0 records.
+   cursor.skip(0);
+
+   //Lets iterate on the result
+   cursor.each(function (err, doc) {
+   if (err) {
+   console.log('err');
+   console.log(err);
+   } else {
+   console.log('doc');
+   console.log(doc);
+   return doc;
+   }
+   });*/
 }
 function opera(accion, colect,query, projection) {
   return new Promise(function (resolve, reject) {

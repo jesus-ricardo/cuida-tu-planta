@@ -42,7 +42,8 @@ router.post('/user/login',appController.userLogin);
 router.post('/user/insert',appController.insertUser);
 router.post('/planta/new',appController.insertPlanta);
 router.get('/planta/registro',appController.insertRegistro);
-router.get('/estadoActual/:id/:luz',appController.estadoActual);
+router.get('/estadoActual/:idPlanta/:luz/:humedad',appController.estadoActual); //recibe estado desde arduino
+router.get('/planta/estadoActual/:idPlanta',appController.getEstadoPlanta); //recoge estado
 router.get('/planta/select/:idUser',appController.selectPlantas);
 router.get('/planta/get/:idUser/:idPlanta',appController.getPlanta);
 router.post('/upload', upload.single('planta'),appController.insertFotoPrincipalPlanta);
