@@ -128,7 +128,7 @@ module.exports.getPlanta = getPlanta;
 module.exports.insertRegistro = insertRegistro;
 module.exports.insertUser = insertUser;
 module.exports.insertFotoPrincipalPlanta = insertFotoPrincipalPlanta;
-
+module.exports.estadoActual = estadoActual;
 module.exports.pruebaDB = pruebaDB;
 
 //////
@@ -312,6 +312,25 @@ function insertFotoPrincipalPlanta(req, res) {
   var file = req.file;
   console.log(file);
   res.status(200).json({message: 'foto recibida'});return;
+}
+
+function estadoActual(req, res) {
+  //var idPlanta = req.params.idPlanta.toString();
+  console.log('GET');
+  console.log(req.params);
+  /*var idUsuario = mongoDB.getObjectID(req.params.idUser);
+  if (idUsuario == null) {res.json({message: 'mal id usuario'}); return;}
+  console.log(idPlanta);
+  console.log(idUsuario);
+  mongoDB.find('user', {_id: idUsuario, "plantas.id": idPlanta},{'plantas.$': 1}).then(function (data){
+    console.log('then');
+    console.log(data);
+    res.status(200).json(data[0].plantas[0]);return;
+  }).catch(function (err){
+    console.log('error');
+    console.log(err);
+    res.json(err);return;
+  })*/
 }
 
 
