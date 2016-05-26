@@ -5,15 +5,20 @@
     .controller('NuevaPlanta2', controller);
 
 
-  function controller($scope, $state, misPlantasSrv, toastSrv, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, APPCONFIG, $localStorage) {
+  function controller($scope, $state, misPlantasSrv, toastSrv, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, APPCONFIG, $localStorage, $http) {
     $scope.data = {
       idPlanta: null,
       nombre: null,
       fechaNacimiento: new Date(),
       descripcion: ''
     };
+    //si se ha hecho una foto con la camara estará a true si no a false
+    $scope.hasCameraImage = false;
+    $scope.fileWeb = null;
     $scope.goBack = goBack;
     $scope.insertPlanta = insertPlanta;
+    $scope.isBrowser = ionic.Platform.is('browser');
+    $scope.readURL = readURL;
     //$scope.takePicture = takePicture;
 
     ////
@@ -24,17 +29,33 @@
 
         misPlantasSrv.insertPlanta($scope.data).then(function () {
           toastSrv.success('planta creada');
-          $scope.upload().then(function (result) {
-            console.log("SUCCESS: " + JSON.stringify(result.response));
-            toastSrv.success('foto enviada correctamente al servidor');
-            routeSrv.go('app.mis-plantas.list');
-          }, function (err) {
-            console.log("ERROR: " + JSON.stringify(err));
-            toastSrv.error("ERROR: " + JSON.stringify(err));
-            toastSrv.error('fallo al enviar foto al servidor');
-          }, function (progress) {
-            // constant progress updates
-          });
+          if ($scope.hasCameraImage) {
+            $scope.upload().then(function (result) {
+              console.log("SUCCESS: " + JSON.stringify(result.response));
+              toastSrv.success('foto enviada correctamente al servidor');
+              routeSrv.go('app.mis-plantas.list');
+            }, function (err) {
+              console.log("ERROR: " + JSON.stringify(err));
+              toastSrv.error("ERROR: " + JSON.stringify(err));
+              toastSrv.error('fallo al enviar foto al servidor');
+            }, function (progress) {
+              // constant progress updates
+            });
+          } else {
+            if ($scope.fileWeb != null) {
+              var fd = new FormData();
+              fd.append("planta", $scope.fileWeb);
+              fd.append('idUsuario',$localStorage.user._id);
+              fd.append('idPlanta',$scope.data.idPlanta);
+              $http.post('/upload',fd,{headers: {'Content-Type': undefined },
+              transformRequest: angular.identity}).then(function (data){
+                console.log('ok');
+              }).catch(function(){
+                console.log('bad');
+              })
+
+            }
+          }
 
         }).catch(function (err) {
           console.log(err.data.message);
@@ -64,7 +85,22 @@
     }
 
 
-
+    function readURL(input) {
+      $scope.fileWeb = input;
+      console.log(input);
+      var input = document.getElementById('imagenWeb');
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          //angular.element(document.querySelector('#previstaImagenWeb')).attr('src',e.target.result);
+          //$('#previstaImagenWeb').attr('src', e.target.result);
+          console.log('hola');
+          var previewImage = document.getElementById('previstaImagenWeb');
+          previewImage.setAttribute('src',e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
 
     //camera
 
@@ -121,6 +157,7 @@
         // 6
         function onCopySuccess(entry) {
           $scope.$apply(function () {
+            $scope.hasCameraImage = true;
             $scope.image = entry.nativeURL;
             toastSrv.success($scope.urlForImage(entry.nativeURL));
             $scope.upload = function () {
