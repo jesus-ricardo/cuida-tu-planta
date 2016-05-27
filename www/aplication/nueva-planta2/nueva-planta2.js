@@ -121,7 +121,7 @@
         sourceType: Camera.PictureSourceType.CAMERA, //   Camera.PictureSourceType.PHOTOLIBRARY
         allowEdit: false,
         encodingType: Camera.EncodingType.JPEG,
-        popoverOptions: CameraPopoverOptions,
+        popoverOptions: CameraPopoverOptions
       };
 
       // 3

@@ -4,7 +4,7 @@
   angular.module('app')
     .controller('RegistroActividad', controller);
 
-  function controller($scope, routeSrv, planta, misPlantasSrv, toastSrv) {
+  function controller($scope, routeSrv, planta, toastSrv) {
     $scope.goBack = goBack;
     $scope.update = update;
     $scope.planta = planta;

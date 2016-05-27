@@ -1,1 +1,6 @@
-/* Empty. Add your own CSS if you like */
+@media (min-width: 800px){
+  .contenedor {
+    width: 800px !important;
+    margin: 0 auto;
+  }
+}

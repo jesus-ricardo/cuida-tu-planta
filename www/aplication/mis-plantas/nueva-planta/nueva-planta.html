@@ -5,33 +5,35 @@
   </ion-nav-buttons>
   <form name="nuevaPlantaForm">
     <ion-content class="padding has-header">
-      <!--<button class = "button" ng-click = "takePicture()">Take Picture</button>
-      <button class = "button" ng-click = "getPicture()">Open Gallery</button>
-      <img ng-src = "{{user.picture}}">-->
-      <div class="list">
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Identificador de planta</span>
-          <input ng-model="data.idPlanta" type="text" name="idPlanta" required
-                 placeholder="Identificador de planta">
-        </label>
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Nombre</span>
-          <input ng-model="data.nombre" type="text" required name="nombre"
-                 placeholder="Nombre">
-        </label>
-        <label class="item item-input item-stacked-label">
-          <i class="icon ion-calendar"></i>
-          <span class="input-label">Fecha de nacimiento</span>
-          <input ng-model="data.fechaNacimiento" name="fechaNacimiento" type="date">
-        </label>
-        <expand-textarea label="Descripción" name="descripcion" required
-                         expand-model="data.descripcion"
-                         placeholder="Introduzca aquí su descripcion"></expand-textarea>
-        <button
-          ng-click="insertPlanta()"
-          class="button button-block button-{{tema}}">
-          Plantar
-        </button>
+      <div class="contenedor">
+        <!--<button class = "button" ng-click = "takePicture()">Take Picture</button>
+        <button class = "button" ng-click = "getPicture()">Open Gallery</button>
+        <img ng-src = "{{user.picture}}">-->
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Identificador de planta</span>
+            <input ng-model="data.idPlanta" type="text" name="idPlanta" required
+                   placeholder="Identificador de planta">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Nombre</span>
+            <input ng-model="data.nombre" type="text" required name="nombre"
+                   placeholder="Nombre">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <i class="icon ion-calendar"></i>
+            <span class="input-label">Fecha de nacimiento</span>
+            <input ng-model="data.fechaNacimiento" name="fechaNacimiento" type="date">
+          </label>
+          <expand-textarea label="Descripción" name="descripcion" required
+                           expand-model="data.descripcion"
+                           placeholder="Introduzca aquí su descripcion"></expand-textarea>
+          <button
+            ng-click="insertPlanta()"
+            class="button button-block button-{{tema}}">
+            Plantar
+          </button>
+        </div>
       </div>
     </ion-content>
   </form>

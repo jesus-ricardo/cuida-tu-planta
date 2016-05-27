@@ -5,7 +5,7 @@
     .module('app')
     .factory('httpSrv', factory);
 
-  function factory($http, APPCONFIG, toastSrv, routeSrv, $q) {
+  function factory($http, APPCONFIG, $q) {
     return {
       post: post,
       get: get

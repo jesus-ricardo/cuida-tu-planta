@@ -5,18 +5,20 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="padding has-header">
-    <div class="list">
-      <a href="#app/mis-plantas/nueva-planta"
-         native-ui-sref="app.mis-plantas.nueva-planta"
-         native-options="{type: 'slide', direction:'down'}">
-        nueva planta
-      </a>
-      <a ng-click="goDetail(planta.id)" ng-repeat="planta in plantas"
-         class="item item-thumbnail-left">
-        <img class="full-image" ng-src="{{getUrlPlanta(planta.fotoPerfil) || 'aplication/core/images/poto1.jpg' }}">
-        <h2>{{planta.nombre}}</h2>
-        <p>{{planta.descripcion || 'No disponible'}}</p>
-      </a>
+    <div class="contenedor">
+      <div class="list">
+        <a href="#app/mis-plantas/nueva-planta"
+           native-ui-sref="app.mis-plantas.nueva-planta"
+           native-options="{type: 'slide', direction:'down'}">
+          nueva planta
+        </a>
+        <a ng-click="goDetail(planta.id)" ng-repeat="planta in plantas"
+           class="item item-thumbnail-left">
+          <img class="full-image" ng-src="{{getUrlPlanta(planta.fotoPerfil) || 'aplication/core/images/poto1.jpg' }}">
+          <h2>{{planta.nombre}}</h2>
+          <p>{{planta.descripcion || 'No disponible'}}</p>
+        </a>
+      </div>
     </div>
   </ion-content>
 </ion-view>

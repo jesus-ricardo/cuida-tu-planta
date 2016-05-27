@@ -17,7 +17,7 @@
 
     function goNuevaPlanta() {
       //routeSrv.go('app.mis-plantas.nueva-planta');
-      $state.go('app.mis-plantas.nueva-planta');
+      $state.go('app.nueva-planta');
     }
 
     function goDetail(id) {
@@ -25,7 +25,7 @@
       $state.go('app.mis-plantas.detail', {id: id});
     }
     function getUrlPlanta(fotoPerfil){
-      if (fotoPerfil == null) {return null};
+      if (fotoPerfil == null) {return null}
       console.log(APPCONFIG.ipServer+'/'+fotoPerfil);
       return APPCONFIG.ipServer+'/'+fotoPerfil;
     }

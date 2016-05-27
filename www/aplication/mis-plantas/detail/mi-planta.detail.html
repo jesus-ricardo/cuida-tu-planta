@@ -1,4 +1,4 @@
-<ion-view view-title="{{planta.nombre}}">
+<ion-view view-title="Detalle">
   <ion-nav-buttons side="left">
     <button class="button button-icon button-clear ion-ios-arrow-back"
             ng-click="goBack()"></button>
@@ -7,38 +7,38 @@
     <button class="button button-icon button-clear ion-ios-pulse-strong"
             ng-click=""></button>
   </ion-nav-buttons>
-
   <ion-content class="padding has-header">
-
-    <div class="list card">
-      <div class="item item-body">
-        <img class="full-image"
-             ng-src=" {{getUrlPlanta(planta.fotoPerfil) || 'aplication/core/images/poto1.jpg'}}">
-        <div class="list card">
-          <ion-item class="item item-icon-left">
-            <i class="icon ion-waterdrop"></i>
-            Humedad
-            <span class="item-note">
-              {{data.humedad}} %
-            </span>
-          </ion-item>
-          <ion-item class="item item-icon-left">
-            <i class="icon ion-ios-sunny-outline"></i>
-            Luz
-            <span class="item-note">
-              {{data.luz}} lux
-            </span>
-          </ion-item>
-          <ion-item ng-click="obtenerEstado()"
-                    class="item item-divider">
-            Descripción
-          </ion-item>
-          <p>
-            {{planta.descripcion || 'Descripción no disponible'}}
-          </p>
+    <div class="contenedor">
+      <div class="list card">
+        <div class="item item-body">
+          <img class="full-image"
+               ng-src=" {{getUrlPlanta(planta.fotoPerfil) || 'aplication/core/images/poto1.jpg'}}">
+          <div class="list card">
+            <ion-item class="item item-icon-left">
+              <i class="icon ion-waterdrop"></i>
+              Humedad
+              <span class="item-note">
+                {{data.humedad}} %
+              </span>
+            </ion-item>
+            <ion-item class="item item-icon-left">
+              <i class="icon ion-ios-sunny-outline"></i>
+              Luz
+              <span class="item-note">
+                {{data.luz}} lux
+              </span>
+            </ion-item>
+            <ion-item ng-click="obtenerEstado()"
+                      class="item item-divider">
+              Descripción
+            </ion-item>
+            <p>
+              {{planta.descripcion || 'Descripción no disponible'}}
+            </p>
+          </div>
+          <!-- ver para moverlo mas a la izquierda -->
+         <!-- <div id="columnchart_values" style="width: 100%; height: 200px;"></div>-->
         </div>
-        <!-- ver para moverlo mas a la izquierda -->
-       <!-- <div id="columnchart_values" style="width: 100%; height: 200px;"></div>-->
       </div>
     </div>
   </ion-content>
