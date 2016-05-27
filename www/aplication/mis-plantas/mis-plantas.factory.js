@@ -12,7 +12,8 @@
       insertPlanta: insertPlanta,
       selectPlantas: selectPlantas,
       getPlanta: getPlanta,
-      insertRegistro: insertRegistro
+      insertRegistro: insertRegistro,
+      obtenerEstado: obtenerEstado
       //
     };
 
@@ -41,8 +42,13 @@
     function getPlanta(idPlanta) {
       return httpSrv.get('/planta/get/' + $localStorage.user._id + '/' + idPlanta);
     }
-    function insertRegistro() {
+    function insertRegistro(idPlanta) {
       return httpSrv.get('/planta/registro' + $localStorage.user._id + '/' + idPlanta);
+    }
+    function obtenerEstado(idPlanta){
+      return httpSrv.get('/planta/estadoActual/' + idPlanta).then(function (data){
+        return data;
+      });
     }
   }
 }());
