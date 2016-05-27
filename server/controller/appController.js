@@ -248,6 +248,7 @@ function selectPlantas(req, res) {
     var collection = db.collection('user');
 
     collection.find({_id: objectId},{"plantas": 1, _id: 0}).toArray(function(err, result) {
+      if (err || result[0] == null){res.status(500).json({message: 'fallo en el select'}); return;}
       console.log(result[0].plantas);
       res.json(result[0].plantas);
     });
