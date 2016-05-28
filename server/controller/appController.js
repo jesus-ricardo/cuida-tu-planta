@@ -390,7 +390,7 @@ function estadoActual(req, res) {
   console.log(req.params);
   var data = req.params;
   console.log(data);
-  mongoDB.opera('insert', 'registro', {
+  mongoDB.opera('insert', 'estado', {
       idPlanta: data.idPlanta, luz: data.luz,
       humedad: data.humedad,
        date: new Date()
@@ -408,7 +408,7 @@ function estadoActual(req, res) {
 function getEstadoPlanta(req, res) {
   var idPlanta = req.params.idPlanta.toString();
   console.log(idPlanta);
-  mongoDB.extraer('registro', {idPlanta: idPlanta},{date:-1})
+  mongoDB.extraer('estado', {idPlanta: idPlanta},{date:-1})
     .then(function (data) {
       console.log('then');
       console.log(data);
