@@ -39,7 +39,7 @@
     $interval(function() {
       obtenerEstado();
       console.log('hoal');
-    }, 2000, 10);
+    }, 1000);
 
     function obtenerEstado() {
       misPlantasSrv.obtenerEstado(planta.id).then(function (data) {
