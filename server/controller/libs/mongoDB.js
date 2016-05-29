@@ -6,7 +6,7 @@ module.exports.find = find;
 module.exports.getObjectID = getObjectID;
 module.exports.opera = opera;
 module.exports.extraer = extraer;
-
+module.exports.remover = remover;
 var host = null;
 var port = null;
 var db = null;
@@ -81,25 +81,18 @@ function extraer(colect, query, ordenado) {
       });
     });
   });
-  /*  var cursor = collection.find(query);
-   cursor.sort(ordenado);
-
-   cursor.limit(1);
-
-   //Skip specified records. 0 for skipping 0 records.
-   cursor.skip(0);
-
-   //Lets iterate on the result
-   cursor.each(function (err, doc) {
-   if (err) {
-   console.log('err');
-   console.log(err);
-   } else {
-   console.log('doc');
-   console.log(doc);
-   return doc;
-   }
-   });*/
+}
+function remover(colet, arg) {
+  return new Promise(function (resolve, reject) {
+    if (urlConexion == null) {
+      reject({messaje: 'conexión no esta definida'});
+    }
+    MongoClient.connect(urlConexion, function (err, db) {
+      db.collection(colet).deleteMany({}, function (err, results) {
+        console.log(results);
+      });
+    });
+  });
 }
 function opera(accion, colect,query, projection) {
   return new Promise(function (resolve, reject) {

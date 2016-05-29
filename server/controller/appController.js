@@ -133,6 +133,7 @@ module.exports.estadoActual = estadoActual;
 module.exports.getEstadoPlanta = getEstadoPlanta;
 module.exports.pruebaDB = pruebaDB;
 
+var count = 0;
 //////
 
 function plantaDatos(req, res) {
@@ -385,24 +386,44 @@ function insertFotoPrincipalPlanta(req, res) {
 }
 
 function estadoActual(req, res) {
-  //var idPlanta = req.params.idPlanta.toString();
-  console.log('Guardar estado');
+  count = count + 1;
+
   console.log(req.params);
+  console.log(count);
   var data = req.params;
-  console.log(data);
-  mongoDB.opera('insert', 'estado', {
-      idPlanta: data.idPlanta, luz: data.luz,
-      humedad: data.humedad,
-       date: new Date()
-    })
+  if(count < 10) {
+    console.log('Guardar estado');
+    console.log(data);
+    mongoDB.opera('insert', 'estado', {
+        idPlanta: data.idPlanta, luz: data.luz,
+        humedad: data.humedad,
+        date: new Date()
+      })
+      .then(function (data) {
+        console.log('Estado insertado correctamente');
+        res.json(data);
+      }).catch(function (err) {
+      console.log('fallo al insertar Estado');
+    });
+  }else{
+    count =0;
+    eliminarRegistro(data);
+  }
+
+}
+function eliminarRegistro(data){
+
+  mongoDB.remover('estado', {idPlanta: data.idPlanta})
     .then(function (data) {
-      console.log('Estado insertado correctamente');
-      res.json(data);
+      console.log('then');
+      console.log(data);
+      return res.json(data);
     }).catch(function (err) {
-    console.log('fallo al insertar Estado');
+    console.log('error');
+    console.log(err);
+    res.json(err);
+    return err;
   });
-
-
 }
 //db.registro.find({'idPlanta':'1'}).sort({date:-1}).limit(1);
 function getEstadoPlanta(req, res) {

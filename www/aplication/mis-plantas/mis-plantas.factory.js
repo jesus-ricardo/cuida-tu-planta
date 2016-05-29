@@ -3,8 +3,12 @@
 
   angular.module('app')
     .factory('misPlantasSrv', factory);
+ 
+  function factory($q, $localStorage, httpSrv ) {
 
-  function factory($q, $localStorage, httpSrv) {
+
+
+
 
 
     return {
@@ -14,8 +18,10 @@
       getPlanta: getPlanta,
       insertRegistro: insertRegistro,
       obtenerEstado: obtenerEstado
+
       //
     };
+
 
     //////////
     function getPicture(options) {
