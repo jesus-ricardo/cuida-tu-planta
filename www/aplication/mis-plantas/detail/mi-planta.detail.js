@@ -4,7 +4,9 @@
   angular.module('app')
     .controller('MiPlantaDetail', controller);
 
-  function controller($scope, routeSrv, planta, APPCONFIG, misPlantasSrv) {
+  function controller($scope, routeSrv, planta, APPCONFIG, misPlantasSrv, $interval) {
+
+
     $scope.goBack = goBack;
     $scope.goRegistro = goRegistro;
     $scope.planta = planta;
@@ -14,6 +16,7 @@
       humedad: '',
       luz: ''
     };
+    //var socket = io.connect('http://192.168.1.38:8888');
     ////
     function goRegistro() {
       routeSrv.go('app.mis-plantas.registro-actividad', {id: planta.id});
@@ -30,6 +33,13 @@
       console.log(APPCONFIG.ipServer + '/' + fotoPerfil);
       return APPCONFIG.ipServer + '/' + fotoPerfil;
     }
+
+
+    ///Sustituir por Socket.IO
+    $interval(function() {
+      obtenerEstado();
+      console.log('hoal');
+    }, 2000, 10);
 
     function obtenerEstado() {
       misPlantasSrv.obtenerEstado(planta.id).then(function (data) {

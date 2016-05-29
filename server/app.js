@@ -9,6 +9,9 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var path = require('path');
 var routes = require('./routes/index.js');
+/*var http= require('http');
+var server = http.createServer(app);
+var io = require('socket.io')(server);*/
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -25,6 +28,11 @@ app.use(function(err, req, res, next) {
 });
 //rutas
 app.use('/',routes);
+
+
+/*io.sockets.on('mensaje', function(){
+  console.log('a user connected');
+});*/
 
 
 // START THE SERVER
