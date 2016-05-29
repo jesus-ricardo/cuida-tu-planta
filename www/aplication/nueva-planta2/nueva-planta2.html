@@ -11,21 +11,36 @@
         <img ng-src = "{{user.picture}}">-->
         <div ng-if="!isBrowser">
           <form name="loginForm">
-              <div>
+            <div>
+              <img class="center small-image" src="./img/instagram-logo.svg" ng-click="addImage()" />
+              <p class="text-center">Tomar fotográfia</p>
+              <img ng-if="hasCameraImage" ng-src="{{urlForImage(image)}}" class="medium-image border-small"/>
+              <p ng-if="hasCameraImage" class="text-center">Vista previa</p>
+            </div>
+              <!--<div>
                 <button class="button button-energized" ng-click="addImage()">
                   Add image
                 </button><br><br>
-                <img ng-if="hasCameraImage" ng-src="{{urlForImage(image)}}" style="width: 100%;height: 200px"/>
-              </div>
+                <img ng-if="hasCameraImage" ng-src="{{urlForImage(image)}}" style="width: 100%;height: 300px"/>
+              </div>-->
           </form>
         </div>
         <div ng-if="isBrowser">
           <form name="imagenWebForm" action="plantavsarduino.tk:8888/upload" enctype="multipart/form-data">
-            <input onchange="angular.element(this).scope().readURL(this.files[0])" name="planta" id="imagenWeb" type="file" accept="image/*" />
+            <div class="upload-image">
+            <label  for="imagenWeb">
+              <figure class="center small-image">
+                <img src="./img/upload-to-cloud.svg" alt="Click para subir imagen"/>
+                <figcaption>Subir Foto</figcaption>
+              </figure>
+              <input class="hide" onchange="angular.element(this).scope().readURL(this.files[0])" name="planta" id="imagenWeb" type="file" accept="image/*" />
+            </label>
+            </div>
             <!--<input hidden name="idPlanta" value="2012" />
             <input hidden name="idUsuario" value="dfsdf" />-->
-            <div>
-              <img id="previstaImagenWeb" />
+            <div id="imagenVistaPrevia" class="oculto">
+                <img class="medium-image border-small" id="previstaImagenWeb" />
+                <p class="text-center">Vista Previa</p>
             </div>
             <!--<input type="submit" value="EnviarFoto" />-->
           </form>
