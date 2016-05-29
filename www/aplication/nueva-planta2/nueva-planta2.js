@@ -97,6 +97,8 @@
           console.log('hola');
           var previewImage = document.getElementById('previstaImagenWeb');
           previewImage.setAttribute('src',e.target.result);
+          //quitamos la clase oculto
+          document.getElementById('imagenVistaPrevia').className = document.getElementById('imagenVistaPrevia').className.replace(/\boculto\b/,'');
         };
         reader.readAsDataURL(input.files[0]);
       }

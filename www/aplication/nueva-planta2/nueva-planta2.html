@@ -21,11 +21,20 @@
         </div>
         <div ng-if="isBrowser">
           <form name="imagenWebForm" action="plantavsarduino.tk:8888/upload" enctype="multipart/form-data">
-            <input onchange="angular.element(this).scope().readURL(this.files[0])" name="planta" id="imagenWeb" type="file" accept="image/*" />
+            <div class="upload-image">
+            <label  for="imagenWeb">
+              <figure class="center small-image">
+                <img src="./img/upload-to-cloud.svg" alt="Click para subir imagen"/>
+                <figcaption>Subir Foto</figcaption>
+              </figure>
+              <input class="hide" onchange="angular.element(this).scope().readURL(this.files[0])" name="planta" id="imagenWeb" type="file" accept="image/*" />
+            </label>
+            </div>
             <!--<input hidden name="idPlanta" value="2012" />
             <input hidden name="idUsuario" value="dfsdf" />-->
-            <div>
-              <img id="previstaImagenWeb" />
+            <div id="imagenVistaPrevia" class="oculto">
+                <img class="medium-image image-border-small" id="previstaImagenWeb" />
+                <p class="text-center">Vista Previa</p>
             </div>
             <!--<input type="submit" value="EnviarFoto" />-->
           </form>
