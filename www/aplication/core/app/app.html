@@ -18,30 +18,25 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item
-          href="#app/usuario/login"
-          native-ui-sref="app.usuario.login"
-          native-options="{type: 'slide', direction:'down'}">
+        <ion-item menu-close
+          ng-click="goLogin()"
+          ng-class="{active: current === 'app.usuario.login'}">
           Login
         </ion-item>
         <ion-item menu-close
-                  ng-class="{active: current === 'app/inicio'}"
-                  href="#app/nueva-planta"
-                  native-ui-sref="app.nueva-planta"
-                  native-options="{type: 'slide', direction:'down'}">
+                  ng-class="{active: current === 'app.nueva-planta'}"
+                  ng-click="goNuevaPlanta()">
           Nueva Planta
         </ion-item>
         <ion-item menu-close
                   ng-class="{active: current === 'app.mis-plantas.list'}"
-                  href="#app/mis-plantas/list"
-                  native-ui-sref="app.mis-plantas.list"
-                  native-options="{type: 'slide', direction:'down'}">
+                  ng-click="goMisPlantas()">
           Mis plantas
         </ion-item>
         <ion-item
-          href="#app/config"
-          native-ui-sref="app.config"
-          native-options="{type: 'slide', direction:'down'}">
+          menu-close
+          ng-class="{active: current === 'app.config'}"
+          ng-click="goConfig()">
           Configuración
         </ion-item>
         <ion-item class="assertive"

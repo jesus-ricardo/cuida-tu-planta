@@ -42,7 +42,6 @@ function insert(colect, query, projection) {
     if (urlConexion == null) {
       reject({messaje: 'conexion no esta definida'});
     }
-    console.log(urlConexion);
     MongoClient.connect(urlConexion, function(err, db) {
       if(err) { reject({message: 'error al conectar'}) }
       var collection = db.collection(colect);
@@ -56,16 +55,13 @@ function insert(colect, query, projection) {
 
 }
 function extraer(colect, query, ordenado) {
-  console.log('1');
   return new Promise(function (resolve, reject) {
     if (urlConexion == null) {
       reject({messaje: 'conexión no esta definida'});
     }
-    console.log(urlConexion);
     MongoClient.connect(urlConexion, function(err, db) {
       if(err) { reject({message: 'error al conectar'}) }
       var collection = db.collection(colect);
-      console.log('2');
       var cursor = collection.find(query);
       cursor.sort(ordenado);
       cursor.limit(1);
@@ -89,7 +85,6 @@ function remover(colet, arg) {
     }
     MongoClient.connect(urlConexion, function (err, db) {
       db.collection(colet).deleteMany({}, function (err, results) {
-        console.log(results);
       });
     });
   });

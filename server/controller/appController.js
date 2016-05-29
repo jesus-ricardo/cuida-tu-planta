@@ -280,7 +280,7 @@ function selectPlantas(req, res) {
 }
 
 function getPlanta(req, res) {
-  var idPlanta = req.params.idPlanta.toString();
+  var idPlanta = req.params.idPlanta;
   var idUsuario = mongoDB.getObjectID(req.params.idUser);
   if (idUsuario == null) {
     res.json({message: 'mal id usuario'});
@@ -306,7 +306,6 @@ function getPlanta(req, res) {
 
 function insertRegistro(req, res) {
   var data = req.body;
-  console.log(req);
   //datos de prueba
   data.idPlanta = 222;
   data.humedad = 30;
@@ -387,23 +386,16 @@ function insertFotoPrincipalPlanta(req, res) {
 
 function estadoActual(req, res) {
   count = count + 1;
-
-  console.log(req.params);
-  console.log(count);
   var data = req.params;
   if(count < 10) {
-    console.log('Guardar estado');
-    console.log(data);
     mongoDB.opera('insert', 'estado', {
         idPlanta: data.idPlanta, luz: data.luz,
         humedad: data.humedad,
         date: new Date()
       })
       .then(function (data) {
-        console.log('Estado insertado correctamente');
         res.json(data);
       }).catch(function (err) {
-      console.log('fallo al insertar Estado');
     });
   }else{
     count =0;
@@ -412,15 +404,10 @@ function estadoActual(req, res) {
 
 }
 function eliminarRegistro(data){
-
   mongoDB.remover('estado', {idPlanta: data.idPlanta})
     .then(function (data) {
-      console.log('then');
-      console.log(data);
       return res.json(data);
     }).catch(function (err) {
-    console.log('error');
-    console.log(err);
     res.json(err);
     return err;
   });
@@ -428,15 +415,10 @@ function eliminarRegistro(data){
 //db.registro.find({'idPlanta':'1'}).sort({date:-1}).limit(1);
 function getEstadoPlanta(req, res) {
   var idPlanta = req.params.idPlanta.toString();
-  console.log(idPlanta);
   mongoDB.extraer('estado', {idPlanta: idPlanta},{date:-1})
     .then(function (data) {
-      console.log('then');
-      console.log(data);
       return res.json(data);
     }).catch(function (err) {
-    console.log('error');
-    console.log(err);
     res.json(err);
     return err;
   });

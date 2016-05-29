@@ -26,12 +26,30 @@ angular.module('app', ['ionic', 'ngStorage', 'ionic-native-transitions', 'toastr
 
   .controller('App', controller);
 
-function controller($scope, $localStorage) {
+function controller($scope, $localStorage, routeSrv) {
 
   $scope.close = close;
   $scope.usuario = $localStorage.user;
-
+  $scope.goLogin = goLogin;
+  $scope.goMisPlantas = goMisPlantas;
+  $scope.goNuevaPlanta = goNuevaPlanta;
+  $scope.goConfig = goConfig;
   /////
+
+  function goLogin(){
+    routeSrv.go('app.usuario.login', {}, {direction: 'left'});
+  }
+
+  function goMisPlantas(){
+    routeSrv.go('app.mis-plantas.list', {}, {direction: 'left'});
+  }
+  function goNuevaPlanta(){
+    routeSrv.go('app.nueva-planta', {}, {direction: 'left'});
+  }
+
+  function goConfig(){
+    routeSrv.go('app.config', {}, {direction: 'left'});
+  }
   function close() {
     ionic.Platform.exitApp();
   }

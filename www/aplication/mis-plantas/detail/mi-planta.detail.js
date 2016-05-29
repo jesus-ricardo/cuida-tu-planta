@@ -38,7 +38,6 @@
     ///Sustituir por Socket.IO
     $interval(function() {
       obtenerEstado();
-      console.log('hoal');
     }, 1000);
 
     function obtenerEstado() {
