@@ -15,6 +15,10 @@ http://ionicframework.com/docs/guide/installation.html
 
 `npm install gulp bower -g`
 
+-install Mongodb 3
+
+https://www.mongodb.com/
+
 ## Set up client
 
 `npm install`
