@@ -27,6 +27,8 @@ https://www.mongodb.com/
 
 `gulp`
 
+`ionic platform add android`
+
 `ionic resources`
 
 ## Set up server
