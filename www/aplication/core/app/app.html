@@ -14,40 +14,48 @@
 
   <ion-side-menu expose-aside-when="large" side="left">
     <ion-header-bar class="bar-{{tema}}">
-      <h1 class="title">{{usuario.name || 'Sin loguear'}}</h1>
+      <p class="text-center">Bienvenido/a</p>
+      <p class="text-center">{{usuario.name || 'Sin loguear'}}</p>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close
-          ng-click="goLogin()"
-          ng-class="{active: current === 'app.usuario.login'}">
+      <hr/>
+        <ion-item
+        class="item-borderless"
+          href="#app/usuario/login"
+          native-ui-sref="app.usuario.login"
+          native-options="{type: 'slide', direction:'down'}">
+          <i class="icon ion-person"></i> 
           Login
         </ion-item>
         <ion-item menu-close
-                  ng-class="{active: current === 'app.nueva-planta'}"
-                  ng-click="goNuevaPlanta()">
-          Nueva Planta
-        </ion-item>
-        <ion-item menu-close
+        class="item-borderless"
                   ng-class="{active: current === 'app.mis-plantas.list'}"
-                  ng-click="goMisPlantas()">
-          Mis plantas
+                  href="#app/mis-plantas/list"
+                  native-ui-sref="app.mis-plantas.list"
+                  native-options="{type: 'slide', direction:'down'}">
+          <i class="icon ion-leaf"></i>Mis plantas
         </ion-item>
         <ion-item
-          menu-close
-          ng-class="{active: current === 'app.config'}"
-          ng-click="goConfig()">
+        class="item-borderless"
+          href="#app/config"
+          native-ui-sref="app.config"
+          native-options="{type: 'slide', direction:'down'}">
+          <i class="icon ion-settings"></i>
           Configuración
         </ion-item>
-        <ion-item class="assertive"
+        <ion-item class="item-borderless"
                   menu-close
                   ng-click="">
+                  
+          <i class="icon ion-android-exit"></i>
           Cerrar sesión
         </ion-item>
-        <ion-item class="assertive stable-bg"
+        <ion-item class="stable-bg item-borderless"
                   menu-close
                   ng-click="close()"
                   ng-if="">
+          <i class="icon ion-android-exit"></i>
           Cerrar aplicación
         </ion-item>
       </ion-list>
