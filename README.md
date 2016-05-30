@@ -5,6 +5,16 @@ aplicación móvil para monitorizar tus plantaciones.
 
 `git clone https://github.com/jesus-ricardo/planta-arduino.git`
 
+## Prerequisites
+
+-install ionic and all programs dependencies (node, cordova etc...)
+
+http://ionicframework.com/docs/guide/installation.html
+
+-install gulp and bower globally
+
+`npm install gulp bower -g`
+
 ## Set up client
 
 `npm install`
