@@ -16,24 +16,28 @@ function conecta(hostP, portP, dbP) {
   host = hostP;
   port = portP;
   db = dbP;
-  urlConexion  = 'mongodb://' + host + ':' + port + '/' + db;
+  urlConexion = 'mongodb://' + host + ':' + port + '/' + db;
 }
 
 function find(colect, query, projection) {
   return new Promise(function (resolve, reject) {
-      if (urlConexion == null) {
-        reject({messaje: 'conexion no esta definida'});
+    if (urlConexion == null) {
+      reject({messaje: 'conexion no esta definida'});
+    }
+    console.log(urlConexion);
+    MongoClient.connect(urlConexion, function (err, db) {
+      if (err) {
+        reject({message: 'error al conectar'})
       }
-      console.log(urlConexion);
-      MongoClient.connect(urlConexion, function(err, db) {
-        if(err) { reject({message: 'error al conectar'}) }
-        var collection = db.collection(colect);
+      var collection = db.collection(colect);
 
-        collection.find(query, projection).toArray(function(err, result) {
-          if (err){reject(err)}
-          resolve(result);
-        });
+      collection.find(query, projection).toArray(function (err, result) {
+        if (err) {
+          reject(err)
+        }
+        resolve(result);
       });
+    });
   });
 
 }
@@ -42,12 +46,16 @@ function insert(colect, query, projection) {
     if (urlConexion == null) {
       reject({messaje: 'conexion no esta definida'});
     }
-    MongoClient.connect(urlConexion, function(err, db) {
-      if(err) { reject({message: 'error al conectar'}) }
+    MongoClient.connect(urlConexion, function (err, db) {
+      if (err) {
+        reject({message: 'error al conectar'})
+      }
       var collection = db.collection(colect);
 
-      collection.insert(query, projection,function(err, result) {
-        if (err){reject({message: 'no se pudo hacer la query'})}
+      collection.insert(query, projection, function (err, result) {
+        if (err) {
+          reject({message: 'no se pudo hacer la query'})
+        }
         resolve(result);
       });
     });
@@ -59,8 +67,10 @@ function extraer(colect, query, ordenado) {
     if (urlConexion == null) {
       reject({messaje: 'conexión no esta definida'});
     }
-    MongoClient.connect(urlConexion, function(err, db) {
-      if(err) { reject({message: 'error al conectar'}) }
+    MongoClient.connect(urlConexion, function (err, db) {
+      if (err) {
+        reject({message: 'error al conectar'})
+      }
       var collection = db.collection(colect);
       var cursor = collection.find(query);
       cursor.sort(ordenado);
@@ -89,25 +99,41 @@ function remover(colet, arg) {
     });
   });
 }
-function opera(accion, colect,query, projection) {
+function opera(accion, colect, query, projection, options) {
   return new Promise(function (resolve, reject) {
     if (urlConexion == null) {
       reject({messaje: 'conexion no esta definida'});
     }
     console.log(urlConexion);
-    MongoClient.connect(urlConexion, function(err, db) {
-      if(err) { reject({message: 'error al conectar'}) }
+    MongoClient.connect(urlConexion, function (err, db) {
+      if (err) {
+        reject({message: 'error al conectar'})
+      }
       var collection = db.collection(colect);
-      if (accion == 'insert' ||accion == 'update'){
-        collection[accion](query, projection,function(err, result) {
-          if (err){reject(err)}
+      if (accion == 'insert' || accion == 'update') {
+        collection[accion](query, projection, function (err, result) {
+          if (err) {
+            reject(err)
+          }
           resolve(result);
         });
-      } else{
-      collection[accion](query, projection).toArray(function(err, result) {
-        if (err){reject({message: 'no se pudo hacer la query'})}
-        resolve(result);
-      });
+      }
+       else if (accion == 'findAndModify') {
+        collection[accion](query,[['_id','asc']], projection, options, function (err, result) {
+          if (err) {
+            reject(err)
+          }
+          resolve(result);
+        });
+      }
+      else
+      {
+        collection[accion](query, projection).toArray(function (err, result) {
+          if (err) {
+            reject({message: 'no se pudo hacer la query'})
+          }
+          resolve(result);
+        });
       }
     });
   });

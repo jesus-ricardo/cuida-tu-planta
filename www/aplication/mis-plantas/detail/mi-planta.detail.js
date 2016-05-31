@@ -42,12 +42,13 @@
 
     function obtenerEstado() {
       misPlantasSrv.obtenerEstado(planta.id).then(function (data) {
-        $scope.data = {
-          humedad: data.humedad,
-          luz: data.luz
+        if(data) {
+          $scope.data = {
+            humedad: data.humedad,
+            luz: data.luz
+          }
         }
       });
-
     }
 
 
