@@ -3,8 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('app', ['ionic', 'ngStorage', 'ionic-native-transitions', 'toastr',
-  'ngCordova', 'btford.socket-io'])
+angular.module('app', ['ionic', 'ngStorage', 'ionic-native-transitions', 'toastr', 'ngCordova'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -26,14 +25,36 @@ angular.module('app', ['ionic', 'ngStorage', 'ionic-native-transitions', 'toastr
 
   .controller('App', controller);
 
-function controller($scope, $localStorage) {
+function controller($scope, $localStorage, routeSrv) {
 
   $scope.close = close;
   $scope.usuario = $localStorage.user;
+  $scope.goLogin = goLogin;
+  $scope.goMisPlantas = goMisPlantas;
+  $scope.goNuevaPlanta = goNuevaPlanta;
+  $scope.goConfig = goConfig;
 
+  $scope.$on('$stateChangeSuccess', function (event, toState, toParams) {
+      $scope.current = toState.name;
+    });
   /////
   function close() {
     ionic.Platform.exitApp();
+  }
+
+  function goLogin(){
+    routeSrv.go('app.usuario.login', {}, {direction: 'left'});
+  }
+
+  function goMisPlantas(){
+    routeSrv.go('app.mis-plantas.list', {}, {direction: 'left'});
+  }
+  function goNuevaPlanta(){
+    routeSrv.go('app.nueva-planta', {}, {direction: 'left'});
+  }
+
+  function goConfig(){
+    routeSrv.go('app.config', {}, {direction: 'left'});
   }
 
 }
