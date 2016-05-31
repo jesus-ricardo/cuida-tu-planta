@@ -4,7 +4,7 @@
   angular.module('app')
     .factory('routeSrv', factory);
 
-  function factory($ionicNativeTransitions, $state, $ionicHistory) {
+  function factory($ionicNativeTransitions, $state, $ionicHistory,toastSrv) {
 
     return {
       clearIonicHistory: clearIonicHistory,
@@ -51,7 +51,12 @@
       } else if (ionic.Platform.is('browser')) {
         go('app.mis-plantas.list', {}, {direction: 'up'});
       } else {
-        ionic.Platform.exitApp();
+        toastSrv.confirm('Confirmación','¿Desea salir de la aplicación?').then(function (res){
+          if(res){
+            ionic.Platform.exitApp();
+          }
+        });
+
       }
     }
 

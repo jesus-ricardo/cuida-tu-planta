@@ -38,17 +38,17 @@
     ///Sustituir por Socket.IO
     $interval(function() {
       obtenerEstado();
-      console.log('hoal');
     }, 1000);
 
     function obtenerEstado() {
       misPlantasSrv.obtenerEstado(planta.id).then(function (data) {
-        $scope.data = {
-          humedad: data.humedad,
-          luz: data.luz
+        if(data) {
+          $scope.data = {
+            humedad: data.humedad,
+            luz: data.luz
+          }
         }
       });
-
     }
 
 

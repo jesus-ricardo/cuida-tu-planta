@@ -3,13 +3,8 @@
 
   angular.module('app')
     .factory('misPlantasSrv', factory);
- 
+
   function factory($q, $localStorage, httpSrv ) {
-
-
-
-
-
 
     return {
       getPicture: getPicture,
@@ -46,12 +41,16 @@
     }
 
     function getPlanta(idPlanta) {
-      return httpSrv.get('/planta/get/' + $localStorage.user._id + '/' + idPlanta);
+      return httpSrv.get('/planta/get/' + $localStorage.user._id + '/' + idPlanta)
+        .then(function (data) {     
+        return data;
+      });
     }
     function insertRegistro(idPlanta) {
       return httpSrv.get('/planta/registro' + $localStorage.user._id + '/' + idPlanta);
     }
-    function obtenerEstado(idPlanta){
+    
+    function obtenerEstado(idPlanta) {
       return httpSrv.get('/planta/estadoActual/' + idPlanta).then(function (data){
         return data;
       });

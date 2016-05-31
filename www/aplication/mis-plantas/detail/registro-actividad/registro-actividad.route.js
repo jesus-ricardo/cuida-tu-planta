@@ -13,6 +13,9 @@
       resolve: {
         planta: function (misPlantasSrv, $stateParams) {
           return misPlantasSrv.getPlanta($stateParams.id);
+        },
+        estado: function (misPlantasSrv, $stateParams) {
+          return misPlantasSrv.obtenerEstado($stateParams.id);
         }
       }
     });

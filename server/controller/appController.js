@@ -4,120 +4,8 @@ var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
 var mongoDB = require('./libs/mongoDB.js');
 var fs = require('fs');
-/*
- module.exports.selectFichero=function(req,res){
- res.json(fichero);
- };
- module.exports.getIdFichero=function(req,res){
- var id=req.params.id;
- var actor={};
- for (var f=0,itera=true;f<fichero.length && itera;f++){
- if (fichero[f].id==id){
- actor=fichero[f];
- itera=false;
- }
- }
- res.json(actor);
- };
- module.exports.getpIdFichero=function(req,res){
- var id=req.body.id;
- var actor=[{}];
- for (var f=0,itera=true;f<fichero.length && itera;f++){
- if (fichero[f].id==id){
- actor[0]=fichero[f];
- itera=false;  	}
- }
- res.json(actor);
- };
- module.exports.modificaFicheroActor=function(req,res){
- var actor=req.body.actor;
- console.log(actor);
- for (var f=0,itera=true;f<fichero.length && itera;f++){
- console.log("iterando fichero[f].id"+fichero[f].id+"_ actor.id"+actor.id);
- if (fichero[f].id==actor.id){
- fichero[f]=actor;
- console.log("entroo");
- itera=false;
- }
- }
- console.log(fichero);
- res.status(200).end();
- };
- module.exports.insertaFicheroActor=function(req,res){
- var actor=req.body.actor;
- fichero.push(actor);
- res.status(200).end();
- }
- module.exports.eliminaFicheroActor=function(req,res){
- var actor=req.body.actor;
- for (var f=0,itera=true;f<fichero.length && itera;f++){
- if (fichero[f].id==actor.id){
- fichero.splice(f,1);
- itera=false;
- }
- }
- res.status(200).end();
- }
- module.exports.insertaMysqlActor=function(req,res){
- var actor=req.body.actor;
- var conect=connection.createConnection();
- conect.connect();
- var sql=mysql.format("insert into actores (id,first_name,last_name) values(?,?,?)",
- [actor.id,actor.first_name,actor.last_name]);
- conect.query(sql,function(err,rows,fields){
- if (err) {
- conect.end();
- res.status(500).end();
- return;
- }
- res.json("insertado correctamente");
- });
- }
- module.exports.modificaMysqlActor=function(req,res){
- var actor=req.body.actor;
- var conect=connection.createConnection();
- conect.connect();
- console.log(actor);
- conect.query(mysql.format("update actores set first_name=?,last_name=? where id=?",
- [actor.first_name,actor.last_name,actor.id]),
- function(err,rows,fields){
- if (err){
- res.status(500).end();
- }
- res.status(200).end();
- conect.end();
- });
- }
- module.exports.eliminaMysqlActor=function(req,res){
- var id=req.body.id;
- var conect=connection.createConnection();
- conect.connect();
- conect.query(mysql.format("delete from actores where id=?",[id]),function(err,rows,fields){
- console.log(rows);
- res.json(rows);
- conect.end();
- });
- }
- module.exports.selectMysql=function(req,res){
- var conect=connection.createConnection();
- conect.connect();
- conect.query("select * from actores order by last_name",function(err,rows,fields){
- console.log(rows);
- res.json(rows);
- });
- conect.end();
- }
- module.exports.getIdMysql=function(req,res){
- var id=req.body.id;
- var conect=connection.createConnection();
- conect.connect();
- conect.query(mysql.format("select * from actores where id=?",[id]),function(err,rows,fields){
- console.log(rows);
- res.json(rows);
- });
- conect.end();
- }
- */
+
+
 mongoDB.conecta('localhost', 27017, 'plantas');
 module.exports.plantaDatos = plantaDatos;
 module.exports.insertUser = insertUser;
@@ -132,8 +20,8 @@ module.exports.insertFotoPrincipalPlanta = insertFotoPrincipalPlanta;
 module.exports.estadoActual = estadoActual;
 module.exports.getEstadoPlanta = getEstadoPlanta;
 module.exports.pruebaDB = pruebaDB;
+module.exports.eliminarRegistro = eliminarRegistro;
 
-var count = 0;
 //////
 
 function plantaDatos(req, res) {
@@ -280,7 +168,7 @@ function selectPlantas(req, res) {
 }
 
 function getPlanta(req, res) {
-  var idPlanta = req.params.idPlanta.toString();
+  var idPlanta = req.params.idPlanta;
   var idUsuario = mongoDB.getObjectID(req.params.idUser);
   if (idUsuario == null) {
     res.json({message: 'mal id usuario'});
@@ -306,7 +194,6 @@ function getPlanta(req, res) {
 
 function insertRegistro(req, res) {
   var data = req.body;
-  console.log(req);
   //datos de prueba
   data.idPlanta = 222;
   data.humedad = 30;
@@ -386,57 +273,38 @@ function insertFotoPrincipalPlanta(req, res) {
 }
 
 function estadoActual(req, res) {
-  count = count + 1;
-
-  console.log(req.params);
-  console.log(count);
   var data = req.params;
-  if(count < 10) {
-    console.log('Guardar estado');
-    console.log(data);
-    mongoDB.opera('insert', 'estado', {
-        idPlanta: data.idPlanta, luz: data.luz,
+  console.log(data);
+    mongoDB.opera('findAndModify', 'estado', {
+        idPlanta: data.idPlanta},{"$set": {luz: data.luz,
         humedad: data.humedad,
         date: new Date()
-      })
+      }},{"upsert": true})
       .then(function (data) {
-        console.log('Estado insertado correctamente');
         res.json(data);
+        console.log(data);
       }).catch(function (err) {
-      console.log('fallo al insertar Estado');
+      console.log(err);
     });
-  }else{
-    count =0;
-    eliminarRegistro(data);
+
   }
-
-}
 function eliminarRegistro(data){
-
-  mongoDB.remover('estado', {idPlanta: data.idPlanta})
+  mongoDB.remover('registro', {idPlanta: data.idPlanta})
     .then(function (data) {
-      console.log('then');
-      console.log(data);
       return res.json(data);
     }).catch(function (err) {
-    console.log('error');
-    console.log(err);
     res.json(err);
     return err;
   });
 }
+
 //db.registro.find({'idPlanta':'1'}).sort({date:-1}).limit(1);
 function getEstadoPlanta(req, res) {
   var idPlanta = req.params.idPlanta.toString();
-  console.log(idPlanta);
   mongoDB.extraer('estado', {idPlanta: idPlanta},{date:-1})
     .then(function (data) {
-      console.log('then');
-      console.log(data);
       return res.json(data);
     }).catch(function (err) {
-    console.log('error');
-    console.log(err);
     res.json(err);
     return err;
   });
