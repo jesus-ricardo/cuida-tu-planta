@@ -246,7 +246,7 @@ function insertFotoPrincipalPlanta(req, res) {
   console.log(file);
   var filePath = req.file.filename + '.jpg';
   fs.rename('./uploads/' + req.file.filename, './uploads/' + filePath, function (err) {
-    if (err) throw err;
+    if (err) {res.status(500).json({message: 'fallo al renombrar'}); return;}
     console.log(filePath);
     console.log('body');
     console.log(req.body);
@@ -275,16 +275,18 @@ function insertFotoPrincipalPlanta(req, res) {
 function estadoActual(req, res) {
   var data = req.params;
   console.log(data);
-    mongoDB.opera('findAndModify', 'estado', {
+    mongoDB.opera('update', 'estado', {
         idPlanta: data.idPlanta},{"$set": {luz: data.luz,
         humedad: data.humedad,
         date: new Date()
-      }},{"upsert": true})
+      }},{upsert: true})
       .then(function (data) {
         res.json(data);
         console.log(data);
       }).catch(function (err) {
       console.log(err);
+      res.status(500).json({message: 'no se pudo insertar'});
+      return;
     });
 
   }

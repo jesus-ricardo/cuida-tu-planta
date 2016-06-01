@@ -69,7 +69,7 @@ function extraer(colect, query, ordenado) {
     }
     MongoClient.connect(urlConexion, function (err, db) {
       if (err) {
-        reject({message: 'error al conectar'})
+        reject({message: 'error al conectar'});
       }
       var collection = db.collection(colect);
       var cursor = collection.find(query);
@@ -81,6 +81,7 @@ function extraer(colect, query, ordenado) {
       cursor.each(function (err, doc) {
         if (err) {
           console.log(err);
+          reject(err);
         } else {
           resolve(doc);
         }
@@ -111,21 +112,14 @@ function opera(accion, colect, query, projection, options) {
       }
       var collection = db.collection(colect);
       if (accion == 'insert' || accion == 'update') {
-        collection[accion](query, projection, function (err, result) {
+        collection[accion](query, projection, options, function (err, result) {
           if (err) {
             reject(err)
           }
           resolve(result);
         });
       }
-       else if (accion == 'findAndModify') {
-        collection[accion](query,[['_id','asc']], projection, options, function (err, result) {
-          if (err) {
-            reject(err)
-          }
-          resolve(result);
-        });
-      }
+
       else
       {
         collection[accion](query, projection).toArray(function (err, result) {

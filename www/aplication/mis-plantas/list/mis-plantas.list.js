@@ -26,7 +26,6 @@
     }
     function getUrlPlanta(fotoPerfil){
       if (fotoPerfil == null) {return null}
-      console.log(APPCONFIG.ipServer+'/'+fotoPerfil);
       return APPCONFIG.ipServer+'/'+fotoPerfil;
     }
   }
