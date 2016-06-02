@@ -10,6 +10,11 @@
   <ion-content class="padding has-header">
     <div class="contenedor">
       <div class="list card">
+        <ion-item class="item-stable item-button-right">
+          Estado actual
+          <button ng-click="goRegistro()"
+                  class="button button-clear button-{{tema}}">Tomar registro</button>
+        </ion-item>
         <div class="item item-body">
           <img class="full-image"
                ng-src=" {{getUrlPlanta(planta.fotoPerfil) || 'aplication/core/images/poto1.jpg'}}">
@@ -44,10 +49,4 @@
       </div>
     </div>
   </ion-content>
-  <div class="tabs tabs-{{tema}}">
-    <a ng-click="goRegistro()"
-       class="tab-item tab-{{tema}}">
-      Nuevo registro
-    </a>
-  </div>
 </ion-view>

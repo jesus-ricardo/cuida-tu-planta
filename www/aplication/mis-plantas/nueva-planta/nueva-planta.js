@@ -25,8 +25,7 @@
         misPlantasSrv.insertPlanta($scope.data).then(function () {
           toastSrv.success('planta creada');
           routeSrv.go('app.mis-plantas.list');
-        }).catch(function (err) {
-          console.log(err.data.message);
+        }).catch(function (err) {  
           toastSrv.error(err.data.message || 'no se pudo crear planta');
         });
       } else {

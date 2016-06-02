@@ -8,8 +8,7 @@
     $scope.goBack = goBack;
     $scope.update = update;
     $scope.planta = planta;
-    console.log(planta);
-    console.log(estado);
+
 
     if(estado) {
       $scope.arduino = true;

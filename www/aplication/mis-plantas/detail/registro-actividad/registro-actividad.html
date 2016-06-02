@@ -9,6 +9,7 @@
   </ion-nav-buttons>
   <form name="registroForm">
     <ion-content>
+      <div class="contenedor">
       <div ng-if="!arduino">
         <label class="item item-input item-stacked-label">
           <i class="icon ion-waterdrop"></i>
@@ -85,6 +86,7 @@
                          expand-model="data.nota"
                          placeholder="Introduzca aquí su nota"></expand-textarea>
       </div>
+        </div>
     </ion-content>
   </form>
 </ion-view>

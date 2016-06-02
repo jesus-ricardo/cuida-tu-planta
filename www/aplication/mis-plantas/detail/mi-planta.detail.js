@@ -4,9 +4,9 @@
   angular.module('app')
     .controller('MiPlantaDetail', controller);
 
-  function controller($scope, routeSrv, planta, APPCONFIG, misPlantasSrv, $interval) {
+  function controller($scope, routeSrv, planta, APPCONFIG, misPlantasSrv, $interval, loadingSrv) {
 
-
+    loadingSrv.disable();
     $scope.goBack = goBack;
     $scope.goRegistro = goRegistro;
     $scope.planta = planta;
@@ -25,6 +25,7 @@
 
     function goBack() {
       routeSrv.go('app.mis-plantas.list');
+
     }
 
     function getUrlPlanta(fotoPerfil) {
@@ -41,10 +42,10 @@
 
     var intervalPromise;
       intervalPromise = $interval(function () {
-        console.log('hola');
         obtenerEstado();
       }, 1000);
       $scope.$on('$destroy', function () {
+        loadingSrv.enable();
         if (intervalPromise)
           $interval.cancel(intervalPromise);
       });

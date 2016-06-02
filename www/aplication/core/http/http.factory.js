@@ -5,7 +5,7 @@
     .module('app')
     .factory('httpSrv', factory);
 
-  function factory($http, APPCONFIG, $q) {
+  function factory($http, APPCONFIG, $q, loadingSrv) {
     return {
       post: post,
       get: get
@@ -34,14 +34,14 @@
     ////////// priv
 
     function util(method, ruta, parametros) {
-      //loadingSrv.show();
+      loadingSrv.show();
       return $http[method](APPCONFIG.ipServer + ruta, parametros)
         .then(function (res) {
           return res.data;
         })
         .catch(handleError)
         .finally(function () {
-          //loadingSrv.hide();
+          loadingSrv.hide();
         });
     }
 
