@@ -11,15 +11,29 @@
     console.log(planta);
     console.log(estado);
 
-    $scope.data={
-      idPlanta: estado.idPlanta,
-      humedad: estado.humedad,
-      temperatura:23,
-      ph:5,
-      luz: estado.luz,
-      nota:'',
-      fecha: dateSrv.format(new Date())
-    };
+    if(estado) {
+      $scope.arduino = true;
+      $scope.data = {
+        idPlanta: estado.idPlanta,
+        humedad: estado.humedad,
+        temperatura: 23,
+        ph: 5,
+        luz: estado.luz,
+        nota: '',
+        fecha: dateSrv.format(new Date())
+      };
+    }else {
+      $scope.arduino = false;
+      $scope.data = {
+        idPlanta: '',
+        humedad: '',
+        temperatura: '',
+        ph: '',
+        luz: '',
+        nota: '',
+        fecha: dateSrv.format(new Date())
+      };
+    }
     ////
     function goBack() {
       routeSrv.go('app.mis-plantas.detail',{id: planta.id});

@@ -193,25 +193,44 @@ function getPlanta(req, res) {
 }
 
 function insertRegistro(req, res) {
-  var data = req.body;
-  //datos de prueba
-  data.idPlanta = 222;
-  data.humedad = 30;
-  data.ph = 10;
-  data.luz = 300;
-  mongoDB.opera('insert', 'registro', {
-      id: data.idPlanta, humedad: data.humedad, ph: data.ph, luz: data.luz, fecha: new Date()
-    })
-    .then(function (data) {
-      console.log('insertado');
-      console.log(data);
-      res.json(data);
-      return;
-    }).catch(function (err) {
-    console.log('no insertado');
-    console.log(err);
-    res.json(err);
+  console.log(req.body.idUser);
+  console.log(req.body.data);
+  var idUser = req.body.idUser;
+  var data = req.body.data;
+  console.log(data);
+  if (isObjectID(idUser)) {
+    var objetId = mongo.ObjectID(idUser);
+  }
+  else {
+    res.status(400).json({message: 'id no válido'});
     return;
+  }
+  var collection = db.collection('user');
+  collection.find({"plantas.id": data.idPlanta}).toArray(function (err, result) {
+    console.log(result.length);
+    if (result.length == 0) {
+      collection.updateOne({_id: objetId}, {
+        $push: {
+          "plantas": {
+            id: data.idPlanta,
+            nombre: data.nombre,
+            fechaNacimiento: data.fechaNacimiento,
+            descripcion: data.descripcion,
+            registros: [],
+            fotos: []
+          }
+        }
+      }, function (err, result) {
+        if (err) {
+          res.status(500).json({message: 'no se pudo insertar planta'});
+          return;
+        }
+        res.status(200).json({message: 'planta insertada'});
+      });
+    } else {
+      res.status(400).json({message: 'Id planta ya existe'});
+      return;
+    }
   });
 }
 
@@ -311,6 +330,8 @@ function getEstadoPlanta(req, res) {
     return err;
   });
 }
+
+
 
 
 function pruebaDB(req, res) {

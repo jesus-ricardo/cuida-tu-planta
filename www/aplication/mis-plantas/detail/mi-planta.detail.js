@@ -10,6 +10,7 @@
     $scope.goBack = goBack;
     $scope.goRegistro = goRegistro;
     $scope.planta = planta;
+    $scope.arduino = false;
     $scope.getUrlPlanta = getUrlPlanta;
     $scope.obtenerEstado = obtenerEstado;
     $scope.data = {
@@ -35,18 +36,31 @@
     }
 
 
-    ///Sustituir por Socket.IO
-    $interval(function() {
-      obtenerEstado();
-    }, 1000);
+
+
+
+    var intervalPromise;
+      intervalPromise = $interval(function () {
+        console.log('hola');
+        obtenerEstado();
+      }, 1000);
+      $scope.$on('$destroy', function () {
+        if (intervalPromise)
+          $interval.cancel(intervalPromise);
+      });
+
 
     function obtenerEstado() {
       misPlantasSrv.obtenerEstado(planta.id).then(function (data) {
         if(data) {
+          $scope.arduino = true;
           $scope.data = {
             humedad: data.humedad,
             luz: data.luz
           }
+        }else{
+          $scope.arduino = false;
+          $interval.cancel(intervalPromise);
         }
       });
     }

@@ -15,7 +15,13 @@
           return misPlantasSrv.getPlanta($stateParams.id);
         },
         estado: function (misPlantasSrv, $stateParams) {
-          return misPlantasSrv.obtenerEstado($stateParams.id);
+          return misPlantasSrv.obtenerEstado($stateParams.id).then(function (data){
+            if(data){
+              return data;
+            } else{
+              return null;
+            }
+          });
         }
       }
     });

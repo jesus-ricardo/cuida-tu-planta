@@ -80,7 +80,6 @@
     }
 
     function goBack() {
-      toastSrv.warn('pa atras');
       $state.go('app.mis-plantas.list');
     }
 
