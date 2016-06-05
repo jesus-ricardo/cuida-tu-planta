@@ -10,11 +10,11 @@
       password: 'juan'
     };
     $scope.registroData = {
-      nombre: 'juan',
-      apellido1: 'juan',
-      apellido2: 'juan',
-      password: 'juan',
-      email: 'juan@juan.com'
+      nombre: '',
+      apellido1: '',
+      apellido2: '',
+      password: '',
+      email: ''
     };
     $scope.loguear = true;
     $scope.login = login;

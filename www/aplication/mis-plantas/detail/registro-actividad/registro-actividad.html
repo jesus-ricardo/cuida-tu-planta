@@ -8,8 +8,7 @@
             ng-click="update()"></button>
   </ion-nav-buttons>
   <form name="registroForm">
-    <ion-content>
-      <div class="contenedor">
+    <ion-content class="contenedor">
       <div ng-if="!arduino">
         <label class="item item-input item-stacked-label">
           <i class="icon ion-waterdrop"></i>
@@ -46,8 +45,7 @@
                          expand-model="data.nota"
                          placeholder="Introduzca aquí su nota"></expand-textarea>
       </div>
-      <div ng-if="arduino"
-        class="contenedor">
+      <div ng-if="arduino">
         <ion-item class="item item-icon-left">
           <i class="icon ion-waterdrop"></i>
           Humedad
@@ -86,7 +84,6 @@
                          expand-model="data.nota"
                          placeholder="Introduzca aquí su nota"></expand-textarea>
       </div>
-        </div>
     </ion-content>
   </form>
 </ion-view>

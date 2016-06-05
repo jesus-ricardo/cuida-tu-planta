@@ -18,9 +18,9 @@
     }
 
     function goDetail(id) {
-      routeSrv.go('app.mis-plantas.detail', {id: id});
+      routeSrv.go('app.detail', {id: id});
     }
-    
+
     function getUrlPlanta(fotoPerfil){
       if (fotoPerfil == null) {return null}
       return APPCONFIG.ipServer+'/'+fotoPerfil;

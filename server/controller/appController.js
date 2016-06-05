@@ -1,12 +1,10 @@
 var express = require('express');
 var routes = require('../routes/index.js');
 var mongo = require('mongodb');
-var MongoClient = mongo.MongoClient;
 var mongoDB = require('./libs/mongoDB.js');
 var fs = require('fs');
+var app = require('../app.js');
 
-
-mongoDB.conecta('localhost', 27017, 'plantas');
 module.exports.getUser = getUser;
 module.exports.userLogin = userLogin;
 module.exports.insertPlanta = insertPlanta;
@@ -34,30 +32,23 @@ function getUser(req, res, next) {
     return;
   }
   // Connect to the db
-  MongoClient.connect("mongodb://localhost:27017/plantas", function (err, db) {
-    if (err) {
-      return console.dir(err);
-    }
-
-    var collection = db.collection('user');
+    var collection = app.db.collection('user');
     collection.findOne({_id: objetId}, function (err, result) {
-      if (err) {         
+      if (err) {
         res.status(500).json({message: 'fallo al hacer el get'});
         return;
       }
-      if (result == null) {        
+      if (result == null) {
         res.status(404).json({message: 'no encontrado'});
         return;
       }
       res.json(result);
     });
-  });
 }
 function userLogin(req, res) {
   var usuario = req.body;
   // Connect to the db
-  MongoClient.connect("mongodb://localhost:27017/plantas", function (err, db) {
-    var collection = db.collection('user');
+    var collection = app.db.collection('user');
     //compara usuario y password en la bd
     collection.find({
       name: usuario.nombre,
@@ -69,7 +60,6 @@ function userLogin(req, res) {
       }
       res.json(result);
     });
-  });
 }
 function eliminarPlanta(req, res) {
   var idUser = req.body.idUser;
@@ -103,11 +93,7 @@ function insertPlanta(req, res) {
     res.status(400).json({message: 'id no válido'});
     return;
   }
-  MongoClient.connect("mongodb://localhost:27017/plantas", function (err, db) {
-    if (err) {
-      return console.dir(err);
-    }
-    var collection = db.collection('user');
+    var collection = app.db.collection('user');
     var existePlanta = collection.find({"plantas.id": data.idPlanta}).toArray(function (err, result) {
       if (result.length == 0) {
         collection.updateOne({_id: objetId}, {
@@ -133,7 +119,6 @@ function insertPlanta(req, res) {
         return;
       }
     });
-  });
 }
 
 
@@ -174,7 +159,7 @@ function getPlanta(req, res) {
 ////planta/registro',{idUser: $localStorage.user._id, data: estado});
 function insertRegistro(req, res) {
   console.log(req.body.idUser);
-  console.log(req.body.data); 
+  console.log(req.body.data);
 }
 
 function insertUser(req, res) {

@@ -1,4 +1,4 @@
-<ion-view view-title="{{planta.nombre}}">
+<ion-view view-title="{{planta.nombre}} 2">
   <ion-nav-buttons side="left">
     <button class="button button-icon button-clear ion-ios-arrow-back"
             ng-click="goBack()"></button>
@@ -7,7 +7,8 @@
     <button class="button button-icon button-clear ion-ios-pulse-strong"
             ng-click=""></button>
   </ion-nav-buttons>
-  <ion-content class="padding has-header contenedor">
+  <ion-content class="padding has-header">
+    <div class="contenedor">
       <div class="list card">
         <ion-item class="item-stable item-button-right">
           Estado actual
@@ -50,5 +51,6 @@
         </div>
 
       </div>
+    </div>
   </ion-content>
 </ion-view>
