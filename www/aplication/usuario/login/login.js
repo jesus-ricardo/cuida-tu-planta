@@ -31,8 +31,9 @@
           console.log(user[0]);
           toastSrv.success('login realizado');
           routeSrv.go('app.mis-plantas.list');
-        }).catch(function () {
-          toastSrv.error('Login falló');
+        }).catch(function (err) {
+          //toastSrv.error('Login falló');
+          toastSrv.error('error' + JSON.stringify(err));
         });
       } else {
         showErrors();

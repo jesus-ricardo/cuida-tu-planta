@@ -1,4 +1,4 @@
-(function () {
+/*(function () {
   'use strict';
 
   angular
@@ -16,9 +16,9 @@
       }
     });
     $rootScope.$on('$stateChangeStart', function (event, toState) {
-      /*if ($localStorage.user == null && toState.name != 'app.usuario.login') {
+      if ($localStorage.user == null && toState.name != 'app.usuario.login') {
         routeSrv.go('app.usuario.login');
-      }*/
+      }
     });
   }
-})();
+})();*/
