@@ -4,15 +4,18 @@
   angular.module('app')
     .controller('MiPlantaDetail', controller);
 
-  function controller($scope, routeSrv, planta, APPCONFIG, misPlantasSrv, $interval, loadingSrv) {
+  function controller($scope, routeSrv, planta, APPCONFIG, misPlantasSrv, $interval,
+                      loadingSrv, toastSrv) {
 
     loadingSrv.disable();
     $scope.goBack = goBack;
     $scope.goRegistro = goRegistro;
     $scope.planta = planta;
     $scope.arduino = false;
+    $scope.foto = '';
     $scope.getUrlPlanta = getUrlPlanta;
     $scope.obtenerEstado = obtenerEstado;
+    $scope.eliminar = eliminar;
     $scope.data = {
       humedad: '',
       luz: ''
@@ -28,38 +31,47 @@
 
     }
 
-    function getUrlPlanta(fotoPerfil) {
-      if (fotoPerfil == null) {
+    function getUrlPlanta() {
+      if (planta.fotoPerfil == null) {
         return null
       }
-      console.log(APPCONFIG.ipServer + '/' + fotoPerfil);
-      return APPCONFIG.ipServer + '/' + fotoPerfil;
+      $scope.foto = APPCONFIG.ipServer + '/' + planta.fotoPerfil;
+    }
+
+    function eliminar() {
+      toastSrv.confirm('Confirmación', '¿Seguro que desea eliminar esta planta?')
+        .then(function (res) {
+          if (res) {
+            misPlantasSrv.eliminarPlanta(planta.id).then(function () {
+              routeSrv.go('app.mis-plantas.list');
+            });
+          }
+        });
+
+
     }
 
 
-
-
-
     var intervalPromise;
-      intervalPromise = $interval(function () {
-        obtenerEstado();
-      }, 1000);
-      $scope.$on('$destroy', function () {
-        loadingSrv.enable();
-        if (intervalPromise)
-          $interval.cancel(intervalPromise);
-      });
+    intervalPromise = $interval(function () {
+      obtenerEstado();
+    }, 1000);
+    $scope.$on('$destroy', function () {
+      loadingSrv.enable();
+      if (intervalPromise)
+        $interval.cancel(intervalPromise);
+    });
 
 
     function obtenerEstado() {
       misPlantasSrv.obtenerEstado(planta.id).then(function (data) {
-        if(data) {
+        if (data) {
           $scope.arduino = true;
           $scope.data = {
             humedad: data.humedad,
             luz: data.luz
           }
-        }else{
+        } else {
           $scope.arduino = false;
           $interval.cancel(intervalPromise);
         }
@@ -96,6 +108,6 @@
      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
      chart.draw(view, options);
      }*/
-
+    getUrlPlanta();
   }
 }());

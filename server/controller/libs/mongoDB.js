@@ -24,7 +24,6 @@ function find(colect, query, projection) {
     if (urlConexion == null) {
       reject({messaje: 'conexion no esta definida'});
     }
-    console.log(urlConexion);
     MongoClient.connect(urlConexion, function (err, db) {
       if (err) {
         reject({message: 'error al conectar'})
@@ -39,7 +38,6 @@ function find(colect, query, projection) {
       });
     });
   });
-
 }
 function insert(colect, query, projection) {
   return new Promise(function (resolve, reject) {
@@ -80,7 +78,6 @@ function extraer(colect, query, ordenado) {
       //Lets iterate on the result
       cursor.each(function (err, doc) {
         if (err) {
-          console.log(err);
           reject(err);
         } else {
           resolve(doc);
@@ -89,13 +86,19 @@ function extraer(colect, query, ordenado) {
     });
   });
 }
-function remover(colet, arg) {
+function remover(colet, arg, proyec) {
   return new Promise(function (resolve, reject) {
     if (urlConexion == null) {
-      reject({messaje: 'conexión no esta definida'});
+      reject({messaje: 'Conexión no esta definida'});
     }
     MongoClient.connect(urlConexion, function (err, db) {
-      db.collection(colet).deleteMany({}, function (err, results) {
+      db.collection(colet, function (err, tabla) {
+        tabla.updateOne(arg, { $pull: proyec }, function (err, result) {
+          if (err) {
+            console.log(err);
+          }
+          return resolve(result);
+        });
       });
     });
   });
@@ -105,7 +108,7 @@ function opera(accion, colect, query, projection, options) {
     if (urlConexion == null) {
       reject({messaje: 'conexion no esta definida'});
     }
-    console.log(urlConexion);
+
     MongoClient.connect(urlConexion, function (err, db) {
       if (err) {
         reject({message: 'error al conectar'})
@@ -120,8 +123,7 @@ function opera(accion, colect, query, projection, options) {
         });
       }
 
-      else
-      {
+      else {
         collection[accion](query, projection).toArray(function (err, result) {
           if (err) {
             reject({message: 'no se pudo hacer la query'})

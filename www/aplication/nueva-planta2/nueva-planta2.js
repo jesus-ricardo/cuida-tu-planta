@@ -56,7 +56,7 @@
 
             }
           }
-
+          goBack();
         }).catch(function (err) {
           console.log(err.data.message);
           toastSrv.error(err.data.message || 'no se pudo crear planta');

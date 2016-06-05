@@ -10,11 +10,11 @@
       password: 'juan'
     };
     $scope.registroData = {
-      nombre: '',
-      apellido1: '',
-      apellido2: '',
-      password: '',
-      email: ''
+      nombre: 'juan',
+      apellido1: 'juan',
+      apellido2: 'juan',
+      password: 'juan',
+      email: 'juan@juan.com'
     };
     $scope.loguear = true;
     $scope.login = login;
@@ -24,6 +24,7 @@
 
     function login() {
       if ($scope.loginForm.$valid) {
+        console.log($scope.data);
         usuarioSrv.login($scope.data).then(function (user) {
           $localStorage.user = user[0];
           console.log(user[0]);
@@ -49,7 +50,7 @@
 
     function registrar() {
       if ($scope.loginForm.$valid) {
-        usuarioSrv.insertUsuario($scope.registroData).then(function (data) {
+        usuarioSrv.insertUsuario($scope.registroData).then(function () {
           toastSrv.success('cuenta creada');
         }).catch(function (err) {
           console.log(err);

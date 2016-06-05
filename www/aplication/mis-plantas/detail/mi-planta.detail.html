@@ -17,7 +17,7 @@
         </ion-item>
         <div class="item item-body">
           <img class="full-image"
-               ng-src=" {{getUrlPlanta(planta.fotoPerfil) || 'aplication/core/images/poto1.jpg'}}">
+               ng-src=" {{foto || 'aplication/core/images/poto1.jpg'}}">
           <div class="list card">
             <div ng-if="arduino">
             <ion-item class="item item-icon-left">
@@ -35,8 +35,7 @@
               </span>
             </ion-item>
             </div>
-            <ion-item ng-click="obtenerEstado()"
-                      class="item item-divider">
+            <ion-item class="item item-divider">
               Descripción
             </ion-item>
             <p>
@@ -45,7 +44,12 @@
           </div>
           <!-- ver para moverlo mas a la izquierda -->
          <!-- <div id="columnchart_values" style="width: 100%; height: 200px;"></div>-->
+          <button ng-click="eliminar()"
+                  class="button button-block button-assertive">
+            Eliminar
+          </button>
         </div>
+
       </div>
     </div>
   </ion-content>

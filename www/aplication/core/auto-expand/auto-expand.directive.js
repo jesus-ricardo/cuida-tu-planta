@@ -14,11 +14,14 @@
         },
         link: function (scope, element) {
           function update() {
-            element.css('height', 'auto');
-            var height = element[0].children[0].children[1].children[0].scrollHeight;
-            element.css('height', element[0].children[0].children[1].children[0].scrollHeight + 'px');
-            //console.log(element);
+            element.find('textarea').css('height', 'auto');
+            let height = element.find('textarea')[0].scrollHeight;
+            element.find('textarea').css('height',
+              element.find('textarea')[0].scrollHeight + 'px');
           }
+          scope.$watch('sqaModel', function () {
+            update();
+          });
 
 
           scope.$watch('expandModel', function () {

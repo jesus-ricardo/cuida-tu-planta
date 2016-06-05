@@ -35,13 +35,14 @@ router.post('/api/mysql/actor/modifica', appController.modificaMysqlActor);
 //get by id MYSQl
 router.post('/api/mysql/actor/get',appController.getIdMysql);
 */
-router.get('/planta/datos',appController.plantaDatos);
 router.get('/user/new',appController.insertUser);
 router.get('/user/get/:id',appController.getUser);
 router.post('/user/login',appController.userLogin);
 router.post('/user/insert',appController.insertUser);
+
 router.post('/planta/new',appController.insertPlanta);
-router.get('/planta/registro',appController.insertRegistro);
+router.post('/planta/eliminar',appController.eliminarPlanta);
+router.post('/planta/registro',appController.insertRegistro); //Inserta nuevo resgistro del estado de la planta
 router.get('/estadoActual/:idPlanta/:luz/:humedad',appController.estadoActual); //recibe estado desde arduino
 router.get('/planta/estadoActual/:idPlanta',appController.getEstadoPlanta); //recoge estado
 router.get('/planta/select/:idUser',appController.selectPlantas);

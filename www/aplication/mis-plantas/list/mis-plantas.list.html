@@ -12,12 +12,15 @@
            native-options="{type: 'slide', direction:'down'}">
           nueva planta
         </a>
-        <a ng-click="goDetail(planta.id)" ng-repeat="planta in plantas"
+        <div ng-repeat="planta in plantas">
+          <ion-item class="item item-divider item-button-right">
+            {{planta.nombre}}</ion-item>
+        <ion-item ng-click="goDetail(planta.id)"
            class="item item-thumbnail-left">
           <img class="full-image" ng-src="{{getUrlPlanta(planta.fotoPerfil) || 'aplication/core/images/poto1.jpg' }}">
-          <h2>{{planta.nombre}}</h2>
-          <p>{{planta.descripcion || 'No disponible'}}</p>
-        </a>
+          {{planta.descripcion || 'No disponible'}}
+        </ion-item>
+        </div>
       </div>
     </div>
   </ion-content>

@@ -4,12 +4,13 @@
   angular.module('app')
     .controller('RegistroActividad', controller);
 
-  function controller($scope, routeSrv, planta, toastSrv, estado, dateSrv) {
+  function controller($scope, routeSrv, planta, toastSrv, estado,
+                      dateSrv, misPlantasSrv) {
     $scope.goBack = goBack;
     $scope.update = update;
     $scope.planta = planta;
 
-
+    console.log(planta);
     if(estado) {
       $scope.arduino = true;
       $scope.data = {
@@ -37,10 +38,18 @@
     function goBack() {
       routeSrv.go('app.mis-plantas.detail',{id: planta.id});
     }
-    function update(){
+    function update() {
       toastSrv.confirm('Confirmacíón','¿Guardar registro?').then(function (res){
         if(res){
-
+          misPlantasSrv.insertRegistro($scope.data).then(function () {
+            toastSrv.success('Estado registrado');
+            routeSrv.go('app.mis-plantas.detail',{id: planta.id});
+          }).catch(function (err) {
+            toastSrv.error
+            (err.data.message || 'No se pudo añadir registro, revise su conexión');
+          });
+        } else {
+          showErrors();
         }
       });
     }

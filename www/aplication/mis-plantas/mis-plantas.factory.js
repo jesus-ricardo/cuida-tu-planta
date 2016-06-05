@@ -12,8 +12,8 @@
       selectPlantas: selectPlantas,
       getPlanta: getPlanta,
       insertRegistro: insertRegistro,
-      obtenerEstado: obtenerEstado
-
+      obtenerEstado: obtenerEstado,
+      eliminarPlanta: eliminarPlanta
       //
     };
 
@@ -33,7 +33,9 @@
 
 
     function insertPlanta(planta) {
-      return httpSrv.post('/planta/new', {idUser: $localStorage.user._id, data: planta});
+      return httpSrv.post('/planta/new', {idUser: $localStorage.user._id, 
+        data: planta
+      });
     }
 
     function selectPlantas() {
@@ -42,16 +44,21 @@
 
     function getPlanta(idPlanta) {
       return httpSrv.get('/planta/get/' + $localStorage.user._id + '/' + idPlanta)
-        .then(function (data) {     
-        return data;
-      });
+        .then(function (data) {
+          return data;
+        });
     }
-    function insertRegistro(idPlanta) {
-      return httpSrv.get('/planta/registro' + $localStorage.user._id + '/' + idPlanta);
+
+    function eliminarPlanta(id) {
+      return httpSrv.post('/planta/eliminar', {idUser: $localStorage.user._id, idPlanta: id});
     }
-    
+
+    function insertRegistro(estado) {
+      return httpSrv.post('/planta/registro', {idUser: $localStorage.user._id, data: estado});
+    }
+
     function obtenerEstado(idPlanta) {
-      return httpSrv.get('/planta/estadoActual/' + idPlanta).then(function (data){
+      return httpSrv.get('/planta/estadoActual/' + idPlanta).then(function (data) {
         return data;
       });
     }
