@@ -24,14 +24,16 @@
 
     function login() {
       if ($scope.loginForm.$valid) {
+        toastSrv.warn('valido form');
         console.log($scope.data);
         usuarioSrv.login($scope.data).then(function (user) {
           $localStorage.user = user[0];
           console.log(user[0]);
           toastSrv.success('login realizado');
           routeSrv.go('app.mis-plantas.list');
-        }).catch(function () {
-          toastSrv.error('Login falló');
+        }).catch(function (err) {
+          //toastSrv.error('Login falló');
+          toastSrv.error('error' + JSON.stringify(err));
         });
       } else {
         showErrors();
