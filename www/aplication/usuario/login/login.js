@@ -24,6 +24,7 @@
 
     function login() {
       if ($scope.loginForm.$valid) {
+        toastSrv.warn('valido form');
         console.log($scope.data);
         usuarioSrv.login($scope.data).then(function (user) {
           $localStorage.user = user[0];

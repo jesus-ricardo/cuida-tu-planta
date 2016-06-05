@@ -53,7 +53,7 @@ function userLogin(req, res) {
     collection.find({
       name: usuario.nombre,
       password: usuario.password
-    }).toArray(function (err, result) {
+    }, {'plantas': 0}).toArray(function (err, result) {
       if (result.length == 0) {
         res.status(400).json({message: 'login incorrecto'});
         return;

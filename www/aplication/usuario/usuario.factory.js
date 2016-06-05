@@ -12,7 +12,7 @@
 
     //////////
     function login(user) {
-      return httpSrv.post('/user/login', user);    
+      return httpSrv.post('/user/login', user);
     }
 
     function insertUsuario(user) {
