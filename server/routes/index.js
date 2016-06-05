@@ -42,8 +42,8 @@ router.post('/user/insert',appController.insertUser);
 
 router.post('/planta/new',appController.insertPlanta);
 router.post('/planta/eliminar',appController.eliminarPlanta);
-router.post('/planta/registro',appController.insertRegistro); //Inserta nuevo resgistro del estado de la planta
-router.get('/estadoActual/:idPlanta/:luz/:humedad',appController.estadoActual); //recibe estado desde arduino
+router.post('/planta/registro',appController.insertRegistro); 
+router.get('/estadoActual/:idPlanta/:luz/:humedad/:hExt/:tExt/',appController.estadoActual); //recibe estado desde arduino
 router.get('/planta/estadoActual/:idPlanta',appController.getEstadoPlanta); //recoge estado
 router.get('/planta/select/:idUser',appController.selectPlantas);
 router.get('/planta/get/:idUser/:idPlanta',appController.getPlanta);

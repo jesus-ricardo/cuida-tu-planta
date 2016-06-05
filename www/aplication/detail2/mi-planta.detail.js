@@ -18,7 +18,9 @@
     $scope.eliminar = eliminar;
     $scope.data = {
       humedad: '',
-      luz: ''
+      luz: '',
+      hExt: '',
+      tExt: ''
     };
     //var socket = io.connect('http://192.168.1.38:8888');
     ////
@@ -69,7 +71,9 @@
           $scope.arduino = true;
           $scope.data = {
             humedad: data.humedad,
-            luz: data.luz
+            luz: data.luz,
+            hExt: data.hExt,
+            tExt: data.tExt
           }
         } else {
           $scope.arduino = false;

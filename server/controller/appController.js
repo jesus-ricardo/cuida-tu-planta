@@ -220,6 +220,8 @@ function estadoActual(req, res) {
       "$set": {
         luz: data.luz,
         humedad: data.humedad,
+        hExt: data.hExt,
+        tExt: data.tExt,
         date: new Date()
       }
     }, {upsert: true})

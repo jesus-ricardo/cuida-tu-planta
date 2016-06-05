@@ -20,13 +20,27 @@
                ng-src=" {{foto || 'aplication/core/images/poto1.jpg'}}">
           <div class="list card">
             <div ng-if="arduino">
+              <ion-item class="item item-icon-left">
+                <i class="icon ion-thermometer"></i>
+                Temperatura
+                <span class="item-note">
+                  {{data.tExt}}º
+                </span>
+              </ion-item>
             <ion-item class="item item-icon-left">
               <i class="icon ion-waterdrop"></i>
-              Humedad
+              Humedad de la tierra
               <span class="item-note">
                 {{data.humedad}} %
               </span>
             </ion-item>
+              <ion-item class="item item-icon-left">
+                <i class="icon ion-waterdrop"></i>
+                Humedad de la ambiente
+              <span class="item-note">
+                {{data.hExt}} %
+              </span>
+              </ion-item>
             <ion-item class="item item-icon-left">
               <i class="icon ion-ios-sunny-outline"></i>
               Luz
