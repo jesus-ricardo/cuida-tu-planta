@@ -16,6 +16,7 @@
     $scope.getUrlPlanta = getUrlPlanta;
     $scope.obtenerEstado = obtenerEstado;
     $scope.eliminar = eliminar;
+    $scope.isBrowser = ionic.Platform.is('browser');
     $scope.data = {
       humedad: '',
       luz: ''
