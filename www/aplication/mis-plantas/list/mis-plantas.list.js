@@ -4,7 +4,7 @@
   angular.module('app')
     .controller('MisPlantas', controller);
 
-  function controller($scope, plantas, $state, APPCONFIG, routeSrv) {
+  function controller($scope, plantas, $state, APPCONFIG, routeSrv, toastSrv) {
     $scope.plantas = plantas;
     $scope.goDetail = goDetail;
     $scope.goNuevaPlanta = goNuevaPlanta;
@@ -18,7 +18,8 @@
     }
 
     function goDetail(id) {
-      routeSrv.go('app.mis-plantas.detail', {id: id});
+      toastSrv.warn('detail 2');
+      routeSrv.go('app.detail', {id: id});
     }
 
     function getUrlPlanta(fotoPerfil){

@@ -7,7 +7,6 @@
   function factory($q, $localStorage, httpSrv ) {
 
     return {
-      getPicture: getPicture,
       insertPlanta: insertPlanta,
       selectPlantas: selectPlantas,
       getPlanta: getPlanta,
@@ -19,21 +18,8 @@
 
 
     //////////
-    function getPicture(options) {
-      var q = $q.defer();
-
-      navigator.camera.getPicture(function (result) {
-        q.resolve(result);
-      }, function (err) {
-        q.reject(err);
-      }, options);
-
-      return q.promise;
-    }
-
-
     function insertPlanta(planta) {
-      return httpSrv.post('/planta/new', {idUser: $localStorage.user._id, 
+      return httpSrv.post('/planta/new', {idUser: $localStorage.user._id,
         data: planta
       });
     }
@@ -58,9 +44,7 @@
     }
 
     function obtenerEstado(idPlanta) {
-      return httpSrv.get('/planta/estadoActual/' + idPlanta).then(function (data) {
-        return data;
-      });
+      return httpSrv.get('/planta/estadoActual/' + idPlanta);
     }
   }
 }());
