@@ -4,19 +4,13 @@
   angular.module('app')
     .factory('routeSrv', factory);
 
-  function factory($ionicNativeTransitions, $state, $ionicHistory,toastSrv) {
+  function factory($ionicNativeTransitions, $state) {
 
     return {
-      clearIonicHistory: clearIonicHistory,
-      go: go,
-      back: back
+      go: go
     };
 
     //////////
-
-    function clearIonicHistory() {
-      $ionicHistory.clearHistory();
-    }
 
     /*
      * Opciones disponibles:
@@ -27,37 +21,7 @@
       options = {};
       options.type = 'slide';
       options.direction = options.direction || 'left';
-      if (options.reload === true) {
-        return $ionicHistory.clearCache().then(function () {
-          return goTo(state, stateParams, options);
-        });
-      }
       return goTo(state, stateParams, options);
-    }
-
-    function back(optionsParams) {
-      var options = optionsParams || {reload: false};
-      if (
-        $ionicHistory.viewHistory()
-          .histories[$ionicHistory.currentHistoryId()].stack.length > 1
-      ) {
-        if (options.reload === true) {
-          $ionicHistory.clearCache().then(function () {
-            $ionicHistory.goBack();
-          });
-        } else {
-          $ionicHistory.goBack();
-        }
-      } else if (ionic.Platform.is('browser')) {
-        go('app.mis-plantas.list', {}, {direction: 'up'});
-      } else {
-        toastSrv.confirm('Confirmación','¿Desea salir de la aplicación?').then(function (res){
-          if(res){
-            ionic.Platform.exitApp();
-          }
-        });
-
-      }
     }
 
     ////////// priv
