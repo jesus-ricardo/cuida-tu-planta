@@ -1,5 +1,4 @@
 var mongo = require('mongodb');
-var MongoClient = mongo.MongoClient;
 var app = require('../../app.js');
 
 module.exports.find = find;

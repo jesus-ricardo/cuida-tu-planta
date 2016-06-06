@@ -15,7 +15,7 @@
         link: function (scope, element) {
           function update() {
             element.find('textarea').css('height', 'auto');
-            let height = element.find('textarea')[0].scrollHeight;
+            var height = element.find('textarea')[0].scrollHeight;
             element.find('textarea').css('height',
               element.find('textarea')[0].scrollHeight + 'px');
           }

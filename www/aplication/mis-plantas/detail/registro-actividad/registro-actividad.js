@@ -5,7 +5,7 @@
     .controller('RegistroActividad', controller);
 
   function controller($scope, routeSrv, planta, toastSrv, estado,
-                      dateSrv, misPlantasSrv) {
+                      misPlantasSrv) {
     $scope.goBack = goBack;
     $scope.update = update;
     $scope.planta = planta;
@@ -20,7 +20,7 @@
         ph: 5,
         luz: estado.luz,
         nota: '',
-        fecha: dateSrv.format(new Date())
+        fecha: new Date()
       };
     }else {
       $scope.arduino = false;
@@ -31,7 +31,7 @@
         ph: '',
         luz: '',
         nota: '',
-        fecha: dateSrv.format(new Date())
+        fecha: new Date()
       };
     }
     ////

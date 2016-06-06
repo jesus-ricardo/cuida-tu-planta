@@ -22,7 +22,7 @@
      * @returns {promise}
      */
     function login(user) {
-      return $http.post('/user/login', user).then(function(data){return data.data;});
+      return $http.post(APPCONFIG.ipServer + '/user/login', user).then(function(data){return data.data;});
     }
     /**
      * @ngdoc method
