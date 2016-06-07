@@ -39,10 +39,16 @@
             <input ng-model="registroData.email" name="emailRegistro" required type="email"
                    placeholder="Correo *">
           </label>
-          <label class="item item-input">
-            <input ng-model="registroData.password" name="passwordRegistro" required
-                   type="password" placeholder="Contraseña *">
-          </label>
+          <div class="item">
+            <label>
+              <input ng-change="changePassword()" ng-model="registroData.password" name="passwordRegistro" required
+                     type="password" placeholder="Contraseña *">
+            </label>
+            <div>
+              <p>Fortaleza Contraseña:</p>
+              <progress id="progressPassword" max="100" value="{{strongPassword}}"></progress>
+            </div>
+          </div>
           <button
             ng-if="!loguear"
             ng-click="registrar()"
