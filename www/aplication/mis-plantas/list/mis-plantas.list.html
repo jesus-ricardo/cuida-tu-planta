@@ -6,11 +6,13 @@
   </ion-nav-buttons>
   <ion-content class="padding has-header contenedor">
       <div class="list">
-        <a href="#app/mis-plantas/nueva-planta"
-           native-ui-sref="app.mis-plantas.nueva-planta"
-           native-options="{type: 'slide', direction:'down'}">
-          nueva planta
+        <a ng-repeat="planta in plantas" class="item item-thumbnail-left" ng-click="goDetail(planta.id)">
+          <img ng-src="{{getUrlPlanta(planta.fotoPerfil) || 'img/plant.svg' }}">
+          <h2>{{planta.nombre}}</h2>
+          <p>{{planta.descripcion || 'No disponible.'}}</p>
         </a>
+      </div>
+
         <div ng-repeat="planta in plantas">
           <ion-item class="item item-divider item-button-right">
             {{planta.nombre}}</ion-item>
