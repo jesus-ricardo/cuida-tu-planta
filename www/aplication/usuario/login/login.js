@@ -17,6 +17,7 @@
       email: ''
     };
     $scope.loguear = true;
+    $scope.fortalezaPasswordString = 'ninguna';
     $scope.login = login;
     $scope.registrar = registrar;
     $scope.setLoguear = setLoguear;
@@ -33,7 +34,7 @@
           toastSrv.success('login realizado');
           routeSrv.go('app.mis-plantas.list');
         }).catch(function (err) {
-          //toastSrv.error('Login falló');
+          toastSrv.error('Login falló');
           toastSrv.error('error' + JSON.stringify(err));
         });
       } else {
@@ -87,10 +88,23 @@
     function setRegistro() {
       $scope.loguear = false;
     }
-    $scope.changePassword = changePassword;
-
     function changePassword() {
       $scope.strongPassword = scorePassword($scope.registroData.password);
+      $scope.fortalezaPasswordString = getFortalezaPassowordString($scope.strongPassword);
+    }
+    function getFortalezaPassowordString(scorePassword) {
+      if (scorePassword == 0) {
+        return 'ninguna';
+      }else if (scorePassword <= 30) {
+        return 'debil';
+      } else if (scorePassword > 30 && scorePassword <= 60) {
+        return 'media';
+      }  else if (scorePassword > 60 && scorePassword <= 80) {
+        return 'fuerte';
+      } else if (scorePassword > 80) {
+        return 'muy fuerte';
+      }
+      return 'ninguna';
     }
     function scorePassword(pass) {
       var score = 0;

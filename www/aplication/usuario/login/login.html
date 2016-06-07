@@ -44,10 +44,10 @@
               <input ng-change="changePassword()" ng-model="registroData.password" name="passwordRegistro" required
                      type="password" placeholder="Contraseña *">
             </label>
-            <div>
-              <p>Fortaleza Contraseña:</p>
-              <progress id="progressPassword" max="100" value="{{strongPassword}}"></progress>
-            </div>
+          </div>
+          <div class="item">
+            <p>Fortaleza Contraseña: <span>{{fortalezaPasswordString}}</span></p>
+            <progress id="progressPassword" max="100" value="{{strongPassword}}"></progress>
           </div>
           <button
             ng-if="!loguear"
