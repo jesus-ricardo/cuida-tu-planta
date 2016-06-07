@@ -6,10 +6,11 @@
   </ion-nav-buttons>
   <ion-content class="padding has-header contenedor">
       <div class="list">
-        <a ng-repeat="planta in plantas" class="item item-thumbnail-left" ng-click="goDetail(planta.id)">
+        <a ng-repeat="planta in plantas" class="item item-thumbnail-left item-icon-right" ng-click="goDetail(planta.id)">
           <img ng-src="{{getUrlPlanta(planta.fotoPerfil) || 'img/plant.svg' }}">
           <h2>{{planta.nombre}}</h2>
           <p>{{planta.descripcion || 'No disponible.'}}</p>
+          <i class="icon ion-chevron-right {{tema}}"></i>
         </a>
       </div>
 
