@@ -25,13 +25,11 @@
     $scope.changePassword = changePassword;
 
     function login() {
-      if ($scope.loginForm.$valid) {
-        toastSrv.warn('valido form');
-        console.log($scope.data);
+      if ($scope.loginForm.$valid) {    
         usuarioSrv.login($scope.data).then(function (user) {
           $localStorage.user = user[0];
           console.log(user[0]);
-          toastSrv.success('login realizado');
+          toastSrv.success('Conectado');
           routeSrv.go('app.mis-plantas.list');
         }).catch(function (err) {
           toastSrv.error('Login falló');
@@ -44,21 +42,20 @@
 
     function showErrors() {
       if ($scope.loginForm.nombre.$invalid) {
-        toastSrv.error('usuario obligatorio');
+        toastSrv.error('Usuario obligatorio');
       } else if ($scope.loginForm.password.$invalid) {
-        toastSrv.error('contraseña obligatoria');
+        toastSrv.error('Contraseña obligatoria');
       } else {
-        toastSrv.error('formulario invalido');
+        toastSrv.error('Formulario inválido');
       }
     }
 
     function registrar() {
       if ($scope.loginForm.$valid) {
         usuarioSrv.insertUsuario($scope.registroData).then(function () {
-          toastSrv.success('cuenta creada');
+          toastSrv.success('Cuenta creada');
           $scope.loguear = true;
-        }).catch(function (err) {
-          console.log(err);
+        }).catch(function (err) {  
           toastSrv.error(err.data.message || 'Fallo al crear la cuenta');
         })
       } else {
