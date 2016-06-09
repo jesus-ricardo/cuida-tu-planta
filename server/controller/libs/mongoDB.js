@@ -61,14 +61,17 @@ function remover(colet, arg, proyec) {
       });
   });
 }
-function opera(accion, colect, query, projection, options) {
+function opera(accion, colect, query, projection) {
   return new Promise(function (resolve, reject) {
       var collection = app.db.collection(colect);
       if (accion == 'insert' || accion == 'update') {
-        collection[accion](query, projection, options, function (err, result) {
+        collection[accion](query, projection, function (err, result) {
+          console.log('entro');
           if (err) {
+            console.log('error');
             reject(err)
           }
+          console.log('result');
           resolve(result);
         });
       }

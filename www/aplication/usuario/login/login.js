@@ -56,6 +56,7 @@
       if ($scope.loginForm.$valid) {
         usuarioSrv.insertUsuario($scope.registroData).then(function () {
           toastSrv.success('cuenta creada');
+          $scope.loguear = true;
         }).catch(function (err) {
           console.log(err);
           toastSrv.error(err.data.message || 'Fallo al crear la cuenta');

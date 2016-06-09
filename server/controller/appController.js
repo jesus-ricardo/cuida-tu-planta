@@ -163,6 +163,7 @@ function insertRegistro(req, res) {
 }
 
 function insertUser(req, res) {
+  console.log('insert');
   var data = req.body;
   mongoDB.opera('insert', 'user', {
       name: data.nombre,
@@ -172,7 +173,7 @@ function insertUser(req, res) {
       email: data.email,
       plantas: []
     })
-    .then(function data(data) {
+    .then(function (data) {
       console.log('usuario insertado correctamente');
       return res.json(data);
     }).catch(function (err) {
@@ -182,7 +183,7 @@ function insertUser(req, res) {
     }
     res.status(500).json(err);
     return;
-  })
+  });
 }
 
 function insertFotoPrincipalPlanta(req, res) {
