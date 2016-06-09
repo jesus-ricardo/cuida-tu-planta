@@ -8,7 +8,7 @@
     $stateProvider.state('app.mis-plantas.detail', {
       cache: false,
       url: '/detail/:id',
-      templateUrl: '/aplication/mis-plantas/detail/mi-planta.detail.html',
+      templateUrl: 'aplication/mis-plantas/detail/mi-planta.detail.html',
       controller: 'MiPlantaDetail',
       resolve: {
         planta: function (misPlantasSrv, $stateParams) {

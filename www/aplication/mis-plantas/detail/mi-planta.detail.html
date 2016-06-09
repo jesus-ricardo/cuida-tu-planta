@@ -1,4 +1,4 @@
-<ion-view view-title="{{planta.nombre}}">
+<ion-view view-title="{{planta.nombre}} 1">
   <ion-nav-buttons side="left">
     <button class="button button-icon button-clear ion-ios-arrow-back"
             ng-click="goBack()"></button>
@@ -7,7 +7,8 @@
     <button class="button button-icon button-clear ion-ios-pulse-strong"
             ng-click=""></button>
   </ion-nav-buttons>
-  <ion-content class="padding has-header contenedor">
+  <ion-content class="padding has-header">
+    <div class="contenedor">
       <div class="list card">
         <ion-item class="item-stable item-button-right">
           Estado actual
@@ -16,23 +17,37 @@
         </ion-item>
         <div class="item item-body">
           <img class="full-image medium-image border-small"
-               ng-src="{{foto || 'img/plant.svg'}}">
+               ng-src=" {{foto || 'img/plant.svg' }}">
           <div class="list card">
             <div ng-if="arduino">
-            <ion-item class="item item-icon-left">
-              <i class="icon ion-waterdrop"></i>
-              Humedad
+              <ion-item class="item item-icon-left">
+                <i class="icon ion-thermometer"></i>
+                Temperatura
+                <span class="item-note">
+                  <strong>{{data.tExt}}º</strong>
+                </span>
+              </ion-item>
+              <ion-item class="item item-icon-left">
+                <i class="icon ion-waterdrop"></i>
+                Humedad de la tierra
               <span class="item-note">
-                {{data.humedad}} %
+                <strong>{{data.humedad}} %</strong>
               </span>
-            </ion-item>
-            <ion-item class="item item-icon-left">
-              <i class="icon ion-ios-sunny-outline"></i>
-              Luz
+              </ion-item>
+              <ion-item class="item item-icon-left">
+                <i class="icon ion-waterdrop"></i>
+                Humedad de la ambiente
               <span class="item-note">
-                {{data.luz}} lux
+                <strong>{{data.hExt}} %</strong>
               </span>
-            </ion-item>
+              </ion-item>
+              <ion-item class="item item-icon-left">
+                <i class="icon ion-ios-sunny-outline"></i>
+                Luz
+              <span class="item-note">
+                <strong>{{data.luz}} lux</strong>
+              </span>
+              </ion-item>
             </div>
             <ion-item class="item item-divider">
               Descripción
@@ -42,7 +57,7 @@
             </p>
           </div>
           <!-- ver para moverlo mas a la izquierda -->
-         <!-- <div id="columnchart_values" style="width: 100%; height: 200px;"></div>-->
+          <!-- <div id="columnchart_values" style="width: 100%; height: 200px;"></div>-->
           <button ng-click="eliminar()"
                   class="button button-block button-assertive">
             Eliminar
@@ -50,5 +65,6 @@
         </div>
 
       </div>
+    </div>
   </ion-content>
 </ion-view>

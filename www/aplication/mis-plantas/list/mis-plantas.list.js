@@ -14,12 +14,13 @@
     //////
 
     function goNuevaPlanta() {
-      $state.go('app.nueva-planta');
+      toastSrv.warn('nueva planta 1');
+      $state.go('app.mis-plantas.nueva-planta');
     }
 
     function goDetail(id) {
-      toastSrv.warn('detail 2');
-      routeSrv.go('app.detail', {id: id});
+      toastSrv.warn('detail 1');
+      routeSrv.go('app.mis-plantas.detail', {id: id});
     }
 
     function getUrlPlanta(fotoPerfil){
