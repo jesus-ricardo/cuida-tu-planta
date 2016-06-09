@@ -214,7 +214,7 @@ function insertFotoPrincipalPlanta(req, res) {
 
 function estadoActual(req, res) {
   var data = req.params;
-  mongoDB.opera('update', 'estado', {
+  mongoDB.upsert('estado', {
       idPlanta: data.idPlanta
     }, {
       "$set": {
@@ -224,12 +224,10 @@ function estadoActual(req, res) {
         tExt: data.tExt,
         date: new Date()
       }
-    }, {upsert: true})
-    .then(function (data) {
-      res.json(data);
+    }).then(function (data) {
+      return res.json(data);
     }).catch(function (err) {
-    res.status(500).json({message: 'no se pudo insertar'});
-    return;
+      return res.status(500).json({message: 'no se pudo insertar'});
   });
 
 }

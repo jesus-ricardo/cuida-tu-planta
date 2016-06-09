@@ -25,7 +25,7 @@ angular.module('app', ['ionic', 'ngStorage', 'ionic-native-transitions', 'toastr
 
   .controller('App', controller);
 
-function controller($scope, $localStorage, routeSrv) {
+function controller($scope, $localStorage, routeSrv, $window) {
 
   $scope.close = close;
   $scope.usuario = $localStorage.user;
@@ -33,6 +33,7 @@ function controller($scope, $localStorage, routeSrv) {
   $scope.goMisPlantas = goMisPlantas;
   $scope.goNuevaPlanta = goNuevaPlanta;
   $scope.goConfig = goConfig;
+  $scope.cerrarSesion = cerrarSesion;
 
   $scope.$on('$stateChangeSuccess', function (event, toState, toParams) {
       $scope.current = toState.name;
@@ -55,6 +56,10 @@ function controller($scope, $localStorage, routeSrv) {
 
   function goConfig(){
     routeSrv.go('app.config', {}, {direction: 'left'});
+  }
+  function cerrarSesion() {
+    delete $localStorage.user;
+    routeSrv.go('app.usuario.login');
   }
 
 }

@@ -1,21 +1,14 @@
-<ion-view view-title="{{planta.nombre}} 1">
+<ion-view view-title="{{planta.nombre}}">
   <ion-nav-buttons side="left">
     <button class="button button-icon button-clear ion-ios-arrow-back"
             ng-click="goBack()"></button>
   </ion-nav-buttons>
   <ion-nav-buttons side="right">
     <button class="button button-icon button-clear ion-ios-pulse-strong"
-            ng-click=""></button>
+            ng-click="goRegistro()"></button>
   </ion-nav-buttons>
-  <ion-content class="padding has-header">
-    <div class="contenedor">
+  <ion-content class="padding has-header contenedor">
       <div class="list card">
-        <ion-item class="item-stable item-button-right">
-          Estado actual
-          <button ng-click="goRegistro()"
-                  class="button button-clear button-{{tema}}">Tomar registro</button>
-        </ion-item>
-        <div class="item item-body">
           <img class="full-image medium-image border-small"
                ng-src=" {{foto || 'img/plant.svg' }}">
           <div class="list card">
@@ -49,7 +42,7 @@
               </span>
               </ion-item>
             </div>
-            <ion-item class="item item-divider">
+            <ion-item class="item item-divider item-{{tema}}">
               Descripción
             </ion-item>
             <p>
@@ -63,8 +56,5 @@
             Eliminar
           </button>
         </div>
-
-      </div>
-    </div>
   </ion-content>
 </ion-view>

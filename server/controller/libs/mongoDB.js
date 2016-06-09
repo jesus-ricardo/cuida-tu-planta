@@ -6,6 +6,7 @@ module.exports.getObjectID = getObjectID;
 module.exports.opera = opera;
 module.exports.extraer = extraer;
 module.exports.remover = remover;
+module.exports.upsert = upsert;
 
 function find(colect, query, projection) {
   return new Promise(function (resolve, reject) {
@@ -61,11 +62,12 @@ function remover(colet, arg, proyec) {
       });
   });
 }
-function opera(accion, colect, query, projection, options) {
+function opera(accion, colect, query, projection) {
   return new Promise(function (resolve, reject) {
       var collection = app.db.collection(colect);
       if (accion == 'insert' || accion == 'update') {
-        collection[accion](query, projection, options, function (err, result) {
+        collection[accion](query, projection, function (err, result) {
+          console.log('entra');
           if (err) {
             reject(err)
           }
@@ -81,6 +83,17 @@ function opera(accion, colect, query, projection, options) {
           resolve(result);
         });
       }
+  });
+}
+function upsert(colect, query, setter) {
+  return new Promise(function (resolve, reject) {
+    var collection = app.db.collection(colect);
+    collection.update(query, setter, {upsert: true}, function(err, result){
+      if (err){
+        reject(err);
+      }
+      resolve(result);
+    });
   });
 }
 
