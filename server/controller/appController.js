@@ -163,7 +163,6 @@ function insertRegistro(req, res) {
 }
 
 function insertUser(req, res) {
-  console.log('insert');
   var data = req.body;
   mongoDB.opera('insert', 'user', {
       name: data.nombre,

@@ -65,13 +65,10 @@ function opera(accion, colect, query, projection) {
   return new Promise(function (resolve, reject) {
       var collection = app.db.collection(colect);
       if (accion == 'insert' || accion == 'update') {
-        collection[accion](query, projection, function (err, result) {
-          console.log('entro');
-          if (err) {
-            console.log('error');
+        collection[accion](query, projection, function (err, result) {        
+          if (err) {           
             reject(err)
-          }
-          console.log('result');
+          }          
           resolve(result);
         });
       }
