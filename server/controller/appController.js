@@ -172,7 +172,7 @@ function insertUser(req, res) {
       email: data.email,
       plantas: []
     })
-    .then(function data(data) {
+    .then(function (data) {
       console.log('usuario insertado correctamente');
       return res.json(data);
     }).catch(function (err) {
@@ -182,7 +182,7 @@ function insertUser(req, res) {
     }
     res.status(500).json(err);
     return;
-  })
+  });
 }
 
 function insertFotoPrincipalPlanta(req, res) {

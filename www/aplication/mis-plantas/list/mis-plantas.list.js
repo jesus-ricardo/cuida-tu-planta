@@ -4,7 +4,7 @@
   angular.module('app')
     .controller('MisPlantas', controller);
 
-  function controller($scope, plantas, $state, APPCONFIG, routeSrv, toastSrv) {
+  function controller($scope, plantas, $state, APPCONFIG, routeSrv) {
     $scope.plantas = plantas;
     $scope.goDetail = goDetail;
     $scope.goNuevaPlanta = goNuevaPlanta;
@@ -13,13 +13,11 @@
 
     //////
 
-    function goNuevaPlanta() {
-      toastSrv.warn('nueva planta 1');
+    function goNuevaPlanta() {   
       $state.go('app.mis-plantas.nueva-planta');
     }
 
-    function goDetail(id) {
-      toastSrv.warn('detail 1');
+    function goDetail(id) {  
       routeSrv.go('app.mis-plantas.detail', {id: id});
     }
 
