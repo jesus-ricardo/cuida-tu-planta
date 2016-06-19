@@ -69,14 +69,16 @@
     }
     $scope.$on('$stateChangeSuccess', function() {
       getUrlPlanta();
-      intervalPromise = $interval(function () {
-        obtenerEstado();
-      }, 1000);
-      $scope.$on('$destroy', function () {
-        loadingSrv.enable();
-        if (intervalPromise)
-          $interval.cancel(intervalPromise);
-      });
+    });
+
+    intervalPromise = $interval(function () {
+      console.log('intervaleando');
+      obtenerEstado();
+    }, 1000);
+    $scope.$on('$destroy', function () {
+      loadingSrv.enable();
+      if (intervalPromise)
+        $interval.cancel(intervalPromise);
     });
 
   }
